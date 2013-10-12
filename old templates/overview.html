@@ -1,0 +1,108 @@
+{% extends "decisionarea.html" %}
+
+{% block title %}Quarter Info{% endblock%}
+
+{% block content %}
+
+  <div class='span9'>
+
+    <div class='row'>
+      <div class='span11 offset1'>
+          <h2>Decision Overview</h2>
+      </div>
+    </div>
+    <hr>
+
+    <div class='row'>
+      <div class='span11 offset1'>
+      	<h4>Product</h4>
+      	{% for p in products %}<div>{{p.name}}</div>{% endfor %}
+
+      	<h4>Sales</h4>
+
+      	<h4>Marketing</h4>
+      		{% ifnotequal marketing.smhirefirm 0 %}<div> {{marketing.smhirefirm}} </div>{% endifnotequal %}
+      		{% ifnotequal marketing.smhirepeople 0 %}<div> {{marketing.smhirepeople}} </div>{% endifnotequal %}
+      		{% ifnotequal marketing.sponsorsports 0 %}<div> {{marketing.sponsorsports}} </div>{% endifnotequal %}
+      		{% ifnotequal marketing.sponsorcharity 0 %}<div> {{marketing.sponsorcharity}} </div>{% endifnotequal %}
+      		{% ifnotequal marketing.sponsortech 0 %}<div> {{marketing.sponsortech}} </div>{% endifnotequal %}
+      		{% ifnotequal marketing.pp1 0 %}<div> {{marketing.pp1}} </div>{% endifnotequal %}
+      		{% ifnotequal marketing.pp2 0 %}<div> {{marketing.pp2}} </div>{% endifnotequal %}
+      		{% ifnotequal marketing.pp3 0 %}<div> {{marketing.pp3}} </div>{% endifnotequal %}
+      		{% ifnotequal marketing.bundle1 0 %}<div> {{marketing.bundle1}} </div>{% endifnotequal %}
+      		{% ifnotequal marketing.bundle2 0 %}<div> {{marketing.bundle2}} </div>{% endifnotequal %}
+      		{% ifnotequal marketing.bundle3 0 %}<div> {{marketing.bundle3}} </div>{% endifnotequal %}
+
+
+      	<h4>Advertisements</h4>
+      	{% for p in ads %}<div>{{p.name}}  {{p.price}}</div>{% endfor %}
+
+      	<h4>Manufacturer</h4>
+      	{% for p in manufacturer %}<div>{{p.location}}  {{p.capacity}} {{p.costperunit}}</div>{% endfor %}
+
+      	<h4>Warehouse</h4>
+      	{% for p in warehouse %}<div>{{p.location}}  {{p.capacity}} {{p.costperunit}}</div>{% endfor %}
+
+      	<h4>Deals</h4>
+	      	{% if deals.p1 %}<div>{{deals.p1}}</div>{% endif %}
+	      	{% if deals.p2 %}<div>{{deals.p2}}</div>{% endif %}
+	      	{% if deals.p3 %}<div>{{deals.p3}}</div>{% endif %}
+	      	{% if deals.p4 %}<div>{{deals.p4}}</div>{% endif %}
+	      	{% if deals.p5 %}<div>{{deals.p5}}</div>{% endif %}
+	      	{% if deals.a1 %}<div>{{deals.a1}}</div>{% endif %}
+	      	{% if deals.a2 %}<div>{{deals.a2}}</div>{% endif %}
+	      	{% if deals.a3 %}<div>{{deals.a3}}</div>{% endif %}
+	      	{% if deals.a4 %}<div>{{deals.a4}}</div>{% endif %}
+	      	{% if deals.a5 %}<div>{{deals.a5}}</div>{% endif %}
+
+      	<h4>Human Resources</h4>
+	      	{% ifnotequal hr.cscharity 0 %}<div> {{hr.cscharity}} </div>{% endifnotequal %}
+	      	{% ifnotequal hr.csenivro 0 %}<div> {{hr.csenivro}} </div>{% endifnotequal %}
+	      	{% ifnotequal hr.cs3rdworld 0 %}<div> {{hr.cs3rdworld}} </div>{% endifnotequal %}
+	      	{% if hr.salesproc %}<div> True </div>{% endif %}
+	      	{% if hr.salesett %}<div> True </div>{% endif %}
+	      	{% if hr.salesNA %}<div> True </div>{% endif %}
+	      	{% if hr.salesSA %}<div> True </div>{% endif %}
+	      	{% if hr.salesEE %}<div> True </div>{% endif %}
+	      	{% if hr.salesWE %}<div> True </div>{% endif %}
+	      	{% if hr.salesNE %}<div> True </div>{% endif %}
+	      	{% if hr.salesWA %}<div> True </div>{% endif %}
+	      	{% if hr.salesEA %}<div> True </div>{% endif %}
+
+
+      	<h4>Talent</h4>
+      		{% for p in talent %}<div>{{p.name}}  {{p.salary}} {{p.specialty}}</div>{% endfor %}
+
+      	<h4>Investments</h4>
+      		{% ifnotequal investments.prodmach 0 %}<div> {{investments.prodmach}} </div>{% endifnotequal %}
+      		{% ifnotequal investments.prodopt 0 %}<div> {{investments.prodopt}} </div>{% endifnotequal %}
+      		{% if investments.rd1 %}<div> True </div>{% endif %}
+      		{% if investments.rd2 %}<div> True </div>{% endif %}
+      		{% if investments.rd3 %}<div> True </div>{% endif %}
+      		{% if investments.rd4 %}<div> True </div>{% endif %}
+      		{% if investments.rd5 %}<div> True </div>{% endif %}
+      		{% if investments.rd6 %}<div> True </div>{% endif %}
+      		{% if investments.rd7 %}<div> True </div>{% endif %}
+      		{% if investments.rd8 %}<div> True </div>{% endif %}
+      		{% if investments.buy1 %}<div> True </div>{% endif %}
+      		{% if investments.buy2 %}<div> True </div>{% endif %}
+      		{% if investments.buy3 %}<div> True </div>{% endif %}
+      		{% if investments.buy4 %}<div> True </div>{% endif %}
+      		{% if investments.buy5 %}<div> True </div>{% endif %}
+      		{% if investments.buy6 %}<div> True </div>{% endif %}
+      		{% if investments.buy7 %}<div> True </div>{% endif %}
+      		{% if investments.buyNA %}<div> True </div>{% endif %}
+      		{% if investments.buySA %}<div> True </div>{% endif %}
+      		{% if investments.buyEE %}<div> True </div>{% endif %}
+      		{% if investments.buyWE %}<div> True </div>{% endif %}
+      		{% if investments.buyNE %}<div> True </div>{% endif %}
+      		{% if investments.buyWA %}<div> True </div>{% endif %}
+      		{% if investments.buyEA %}<div> True </div>{% endif %}
+
+      </div>
+    </div>
+    <hr>
+
+    
+  </div>
+{% endblock %}

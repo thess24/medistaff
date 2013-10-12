@@ -1,0 +1,77 @@
+{% extends "base.html" %}
+
+{% block title %}System Overview{% endblock%}
+
+{% block content %}
+
+  <div class="page-header position-relative">
+    <h1>
+      {{hospital.name}}
+      <small>
+        <i class="icon-double-angle-right"></i>
+        Hospital Overview
+      </small>
+    </h1>
+  </div><!-- /.page-header -->
+
+<div>
+  <div class="span12">
+    <div class="row">
+      <h4>Hospital Measures</h4>
+        <table class='table table-bordered table-hover'>
+            <thead>
+              <tr>
+                <th></th>
+                <th>Working</th> 
+                <th>Census</th>
+                <th>Hours Scheduled Today</th>
+                <th>HPPD</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th>Hospital Wide</th>
+                <td>{{workers}}</td>
+                <td></td>
+                <td></td>
+                <td></td>
+              </tr>
+            </today>
+          </table>
+      <div class='span8' style='height:150px; background-color:lightgray'>Census and hospital metrics</div>
+      <div class='span4'style='height:150px; background-color:lightgray'>System Mix</div>
+      <div class='span12'style='height:150px; border:1px solid'>Staffing through time</div>
+     </div>  <!-- end of system measures row -->
+    <br>
+    <div class="row">
+      <h4>Unit Measures</h4>
+        <table class='table table-bordered table-hover'>
+            <thead>
+              <tr>
+                <th></th>
+                <th>Working</th>
+                <th>Census</th>
+                <th>Hours Scheduled Today</th>
+                <th>HPPD</th>
+                <th>Graph</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for u in units %}
+              <tr>
+                <th><a href="{{u.slug}}">{{u.name}}</a></th>
+                <td>{{u.num_work}}</td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+              </tr>
+              {% endfor %}
+            </tbody>
+        </table>
+    </div> <!-- end off unit measures -->
+  </div>
+</div>
+
+{% endblock %} 
+

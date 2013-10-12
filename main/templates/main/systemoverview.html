@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+
+{% block title %}System Overview{% endblock%}
+
+{% block content %}
+
+
+
+<div class='page-header position-relative'><h1>{{system.name}}</h1></div>
+
+<div class="row">
+  <div class="span12">
+
+        <ul>
+          {% for h in allhospitals %}
+            <li><h4><a href="{{h.slug}}">{{h.name}}</a></h4></li>
+            <ul>
+            {% for u in allunits %}
+              {% ifequal u.hospital|lower h.name|lower %}
+            <li><h5><a href="{{h.slug}}/{{u.slug}}">{{u.name}}</a></h5></li>
+              {%else%}{% endifequal %}
+            {% endfor %}
+            </ul>
+          {% endfor %}
+        </ul> 
+
+  </div>
+</div>
+
+{% endblock %}

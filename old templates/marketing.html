@@ -1,0 +1,114 @@
+{% extends "decisionarea.html" %}
+
+{% block title %}Quarter Info{% endblock%}
+
+
+{% block head %}
+
+
+
+{% endblock%}
+
+
+{% block content %}
+
+  <div class='span9'>
+
+    <div class='row'>
+      <div class='span11 offset1'> 
+          <h2>Marketing</h2>
+      </div>
+    </div>
+    <hr>
+
+    <div class='row'>
+      <div class='span11 offset1'>
+          <h4>Advertisement Campaigns</h4>
+      </div>
+    </div>
+
+    <div class='row'>
+      <div class='span11 offset1'>
+        <table class="table table-hover">
+            <thead> 
+              <tr>
+                <th>Name</th>
+                <th>Yearly Cost</th>
+                <th>Date Started</th>
+                <th>Target</th>
+                <th>Region</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for ad in ads %}
+              <tr>
+                <td>{{ad.name}}</td>
+                <td>${{ad.price}}</td>
+                <td>Quarter 1</td>
+                <td>Men 20-35</td>
+                <td>North America</td>
+              </tr>
+              {% endfor %}
+              <tr>
+                <td><a href="new"><i class='icon-plus'></i> Add Advertisement</a></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+              </tr>
+            </tbody>
+        </table>
+      </div>
+    </div>
+    {{errors}}
+<form method="post" id='decisionform'> {% csrf_token %}
+  <div class='row'><div class='span11 offset1'>
+
+    <h4>Social Media</h4>
+
+    <div class="input-prepend"><span class="add-on">$</span><input class= "input-small" id="id_smhirefirm" name="smhirefirm" type="text" value="{{formvalues.smhirefirm}}"/></div>
+    <div>Hire a social media firm to take care of interactions with customers and handle all social media accounts</div><br>
+    <div class="input-prepend"><span class="add-on">$</span><input class = "input-small" id="id_smhirepeople" name="smhirepeople" type="text" value="{{formvalues.smhirepeople}}"/></div>
+    <div>Hire associates into the firm to handle the social media accounts (Enter total number of people to dedicate to the social media group)</div><br>
+
+    <h4>Sponsorship</h4>
+    <div class="input-prepend"><span class="add-on">$</span><input class="input-small" id="id_sponsorsports" name="sponsorsports" type="text" value="{{formvalues.sponsorsports}}"/></div>
+    <div>Sponsor a sports team</div><br>
+    <div class="input-prepend"><span class="add-on">$</span><input class="input-small" id="id_sponsorcharity" name="sponsorcharity" type="text" value="{{formvalues.sponsorcharity}}"/></div>
+    <div>Sponsor A Charity Walk</div><br>
+    <div class="input-prepend"><span class="add-on">$</span><input class="input-small" id="id_sponsortech" name="sponsortech" type="text" value="{{formvalues.sponsortech}}"/></div>
+    <div>Host a Technology Conference</div><br>
+
+    <h4>Product Placement</h4>
+    <div class="input-prepend"><span class="add-on">$</span><input class="input-small" id="id_pp1" name="pp1" type="text" value="{{formvalues.pp1}}"/></div>
+    <div>PP 1</div><br>
+    <div class="input-prepend"><span class="add-on">$</span><input class="input-small" id="id_pp2" name="pp2" type="text" value="{{formvalues.pp2}}"/></div>
+    <div>PP 2</div><br>
+    <div class="input-prepend"><span class="add-on">$</span><input class="input-small" id="id_pp3" name="pp3" type="text" value="{{formvalues.pp3}}"/></div>
+    <div>PP 3</div><br>
+
+    <h4>Bundle</h4>
+    <div class="input-prepend"><span class="add-on">$</span><input class="input-small" id="id_bundle1" name="bundle1" type="text" value="{{formvalues.bundle1}}"/></div>
+    <div>Bundle1</div><br>
+    <div class="input-prepend"><span class="add-on">$</span><input class="input-small" id="id_bundle2" name="bundle2" type="text" value="{{formvalues.bundle2}}"/></div>
+    <div>Bundle2</div><br>
+    <div class="input-prepend"><span class="add-on">$</span><input class="input-small" id="id_bundle3" name="bundle3" type="text" value="{{formvalues.bundle3}}"/></div>
+    <div>Bundle3</div><br>
+  </div></div>
+  <div class='span11 offset1'><input type="submit" value= "Update" name="add" class="btn"/></div>
+</form>
+
+<script type="text/javascript">
+// change empty form fields to 0
+$('#decisionform').submit(function() {
+  $(":text").each(function() {
+     if($(this).val() === ""){
+        $(this).val('0');
+      }
+  });
+});
+</script>
+
+
+{% endblock %}
+

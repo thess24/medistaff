@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<!-- BEGIN html -->
+<html lang="en-US">
+  <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <!-- Bootstrap -->
+      <link href="../static/main/bootstrap/css/bootstrap.min.css" rel="stylesheet" media="screen">
+    <title>{% block title %}Staff{% endblock%}</title>
+    <link type="text/css" rel="stylesheet" href="../static/main/normalize.css" />
+    <link type="text/css" rel="stylesheet" href="../static/main/jquery-ui.css" /> 
+    <script src="../static/main/jquery-1.9.1.js"></script>
+    <script src="../static/main/jquery-ui.js"></script>
+    <script src="../static/main/bootstrap/js/bootstrap.min.js"></script>  
+    {% block head %}{% endblock %}
+    <style type="text/css">
+      body {
+        padding-top: 60px;
+        padding-bottom: 40px;
+      }
+    </style>
+  </head>
+
+
+  <body>
+    <div class="navbar navbar-inverse navbar-fixed-top">
+      <div class="navbar-inner">
+        <div class="container-fluid">
+          <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="brand" href="#">BusSim</a>
+          <div class="nav-collapse collapse">
+            <ul class="nav">
+              <li><a href="#"><i class='icon-home icon-white'></i> Home</a></li>
+              <li><a href="{% url 'choosecourse' %}"><i class='icon-pencil icon-white'></i> Course Page</a></li>
+            </ul>
+            <ul class='nav pull-right'>
+              {% if user.is_authenticated %}
+              <li class='dropdown'>
+               <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class='icon-user icon-white'></i> {{user.username}}<b class="caret"></b></a>
+                <ul class="dropdown-menu">
+                  <li><a href="/createcourse">Create Course</a></li>
+                  <li><a href="#">Account Info</a></li>
+                  <li><a href="#">Something else here</a></li>
+                  <li class="divider"></li>
+                  <!-- <li class="nav-header">User</li> -->
+                  <li><a href="/accounts/logout">Logout</a></li>
+                </ul>
+              </li>
+              {% else %}
+              <li><a href="/accounts/login" class="navbar-link">Sign In</a></li>
+              {% endif %}
+            </ul>
+          </div><!--/.nav-collapse -->
+        </div>
+      </div>
+    </div>   
+    
+      <div class="container-fluid">
+      <div class="row-fluid">
+        <div class="span3">
+          <div class="well sidebar-nav">
+            <ul class="nav nav-list">
+              <li class="nav-header">Info and Data</li>
+              <li><a href="{% url 'coursehomepage' coursename %}">Course Homepage</a></li>
+              <li {% ifequal currentpage 'description'%}class='active'{% endifequal %}><a href="{% url 'description' coursename quarter %}">Quarter Description</a></li>
+              <li {% ifequal currentpage 'marketinfo'%}class='active'{% endifequal %}><a href="{% url 'marketinfo' coursename quarter %}">Market Info</a></li>
+              <li class="nav-header">Quarter Decisions</li>
+              <li {% ifequal currentpage 'product'%}class='active'{% endifequal %}><a href="{% url 'product' coursename quarter %}">{% if submits.product %}<i class="icon-ok"></i>{% endif %} Product </a></li>
+              <li {% ifequal currentpage 'sales'%}class='active'{% endifequal %}><a href="{% url 'sales' coursename quarter %}">{% if submits.sales %}<i class="icon-ok"></i>{% endif %} Sales</a></li>
+              <li {% ifequal currentpage 'marketing'%}class='active'{% endifequal %}><a href="{% url 'marketing' coursename quarter %}">{% if submits.marketing %}<i class="icon-ok"></i>{% endif %} Marketing</a></li>
+              <li {% ifequal currentpage 'manufacturing'%}class='active'{% endifequal %}><a href="{% url 'manufacturing' coursename quarter %}">{% if submits.manufacturing %}<i class="icon-ok"></i>{% endif %} Manufacturing</a></li>
+              <li {% ifequal currentpage 'financials'%}class='active'{% endifequal %}><a href="{% url 'financials' coursename quarter %}">{% if submits.financials %}<i class="icon-ok"></i>{% endif %}  Financials</a></li>
+              <li {% ifequal currentpage 'deals'%}class='active'{% endifequal %}><a href="{% url 'deals' coursename quarter %}">{% if submits.deals %}<i class="icon-ok"></i>{% endif %}  Deals</a></li>
+              <li {% ifequal currentpage 'humanresources'%}class='active'{% endifequal %}><a href="{% url 'humanresources' coursename quarter %}">{% if submits.hr %}<i class="icon-ok"></i>{% endif %}  Human Resources</a></li>
+              <li {% ifequal currentpage 'investments'%}class='active'{% endifequal %}><a href="{% url 'futureinvestments' coursename quarter %}">{% if submits.investments %}<i class="icon-ok"></i>{% endif %}  Investments + Research</a></li>
+              <li class="nav-header">Final Steps</li>
+              <li {% ifequal currentpage 'overview'%}class='active'{% endifequal %}><a href="{% url 'overview' coursename quarter %}">Decision Overview</a></li>
+              <li {% ifequal currentpage 'submit'%}class='active'{% endifequal %}><a href="{% url 'submitdecisions' coursename quarter %}"> {% if submits.submit %}<i class="icon-ok"></i> Submitted {% else %}Submit Decisions {% endif %}</a></li>
+            </ul>
+          </div><!--/.well -->
+        </div><!--/span-->
+        <div class='span9'>
+          <div><span class='pull-left'><a href=""><i class="icon-chevron-left"></i>Previous Quarter</a></span>
+            <span class='pull-right'><a href="">Next Quarter</a><i class="icon-chevron-right"></i></span></div>
+        </div>
+        <hr>
+
+<!--         <div class='span9'>
+          <div class="progress">
+            <div class="bar bar-success" style="width: 60%;"></div>
+          </div>
+        </div> -->
+        {% block content %}{% endblock %}
+      </div><!--/row-->
+    </div><!--/.fluid-container-->
+
+
+  <hr>
+      <footer>
+        <p>&copy; Company 2013</p>
+      </footer>
+
+
+
+  </body> 
+</html>

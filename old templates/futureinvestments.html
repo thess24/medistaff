@@ -1,0 +1,345 @@
+{% extends "decisionarea.html" %}
+
+{% block title %}Quarter Info{% endblock%}
+
+{% block content %}
+
+  <div class='span9'>
+
+    <div class='row'>
+      <div class='span11 offset1'>
+          <h2>Investments + Research</h2>
+      </div>
+    </div>
+    <hr>
+
+<!-- {{InvestmentForm.as_p}} -->
+
+<form method="post" id='decisionform'> {% csrf_token %}
+<!-- Pfoduction -->
+    <div class='row'> <div class='span11 offset1'>
+          <h4>Enhance Production</h4>
+
+    <div class="input-prepend"><span class="add-on">$</span>
+      <input id="id_prodmach" name="prodmach" type="text" class='input-small' Value= '{{formvalues.prodmach}}'/>
+    </div>
+    <div>Invest in new machinery</div><br>
+    
+
+    <div class="input-prepend"><span class="add-on">$</span>
+      <input id="id_prodopt" name="prodopt" type="text" class='input-small' Value= '{{formvalues.prodopt}}'/>
+    </div>
+    <div>Spend money on research to optimize production lines</div><br>
+
+          <h4>Research and Development</h4>
+          <h6>Product Technology</h6>
+
+<!-- R and D -->
+    <div class='row'>
+      <div class="input-prepend span3 offset2">
+        <span class="add-on">$</span>
+        <input type="text" class='input-small' value='0' disabled>
+      </div>
+      <div class='span7 pull-left'>        
+          <label class="checkbox">
+            <input id="id_rd1" name="rd1" type="checkbox" {% if formvalues.rd1 %} checked {% endif %}/>
+            Messaging application geared towards asian market
+          </label>
+      </div>
+    </div>
+    <div class='row'>
+      <div class="input-prepend span3 offset2">
+        <span class="add-on">$</span>
+        <input id="appendedPrependedInput" type="text" class='input-small' value='0' disabled>
+      </div>
+      <div class='span7 pull-left'>        
+          <label class="checkbox">
+            <input id="id_rd2" name="rd2" type="checkbox" {% if formvalues.rd2 %} checked {% endif %}/>
+            Option one is this and that—be sure to include why it's great
+          </label>
+      </div>
+    </div>
+    <div class='row'>
+      <div class="input-prepend span3 offset2">
+        <span class="add-on">$</span>
+        <input id="appendedPrependedInput" type="text" class='input-small' value='0' disabled>
+      </div>
+      <div class='span7 pull-left'>        
+          <label class="checkbox">
+            <input id="id_rd3" name="rd3" type="checkbox" {% if formvalues.rd3 %} checked {% endif %}/>
+            Option one is this and that—be sure to include why it's great
+          </label>
+      </div>
+    </div>
+    <div class='row'>
+      <div class="input-prepend span3 offset2">
+        <span class="add-on">$</span>
+        <input id="appendedPrependedInput" type="text" class='input-small' value='0' disabled>
+      </div>
+      <div class='span7 pull-left'>        
+          <label class="checkbox">
+            <input id="id_rd4" name="rd4" type="checkbox" {% if formvalues.rd4 %} checked {% endif %}/>
+            Option one is this and that—be sure to include why it's great
+          </label>
+      </div>
+    </div>
+    <div class='row'>
+      <div class='span10 offset2'>
+          <h6>IT</h6>
+      </div>
+    </div>
+    <div class='row'>
+      <div class="input-prepend span3 offset2">
+        <span class="add-on">$</span>
+        <input id="appendedPrependedInput" type="text" class='input-small' value='0' disabled>
+      </div>
+      <div class='span7 pull-left'>        
+          <label class="checkbox">
+            <input id="id_rd5" name="rd5" type="checkbox" {% if formvalues.rd5 %} checked {% endif %}/>
+            Option one is this and that—be sure to include why it's great
+          </label>
+      </div>
+    </div>
+    <div class='row'>
+      <div class="input-prepend span3 offset2">
+        <span class="add-on">$</span>
+        <input id="appendedPrependedInput" type="text" class='input-small' value='0' disabled>
+      </div>
+      <div class='span7 pull-left'>        
+          <label class="checkbox">
+            <input id="id_rd6" name="rd6" type="checkbox" {% if formvalues.rd6 %} checked {% endif %}/>
+            Option one is this and that—be sure to include why it's great
+          </label>
+      </div>
+    </div>
+    <div class='row'>
+      <div class="input-prepend span3 offset2">
+        <span class="add-on">$</span>
+        <input id="appendedPrependedInput" type="text" class='input-small' value='0' disabled>
+      </div>
+      <div class='span7 pull-left'>        
+          <label class="checkbox">
+            <input id="id_rd7" name="rd7" type="checkbox" {% if formvalues.rd7 %} checked {% endif %}/>
+            Option one is this and that—be sure to include why it's great
+          </label>
+      </div>
+    </div>
+    <div class='row'>
+      <div class="input-prepend span3 offset2">
+        <span class="add-on">$</span>
+        <input id="appendedPrependedInput" type="text" class='input-small' value='0' disabled>
+      </div>
+      <div class='span7 pull-left'>        
+          <label class="checkbox">
+            <input id="id_rd8" name="rd8" type="checkbox" {% if formvalues.rd8 %} checked {% endif %}/>
+            Option one is this and that—be sure to include why it's great
+          </label>
+      </div>
+    </div>
+
+<!-- Market Research -->
+
+          <h4>Buy Market Research</h4>
+          <h6>Demographic Data</h6>
+
+    <div class='row'>
+      <div class="input-prepend span3 offset2">
+        <span class="add-on">$</span>
+        <input id="appendedPrependedInput" type="text" class='input-small' value='0' disabled>
+      </div>
+      <div class='span7 pull-left'>        
+          <label class="checkbox">
+            <input id="id_buy1" name="buy1" type="checkbox" {% if formvalues.buy1 %} checked {% endif %}/>
+            Option one is this and that—be sure to include why it's great
+          </label>
+      </div>
+    </div>
+    <div class='row'>
+      <div class="input-prepend span3 offset2">
+        <span class="add-on">$</span>
+        <input id="appendedPrependedInput" type="text" class='input-small' value='0' disabled>
+      </div>
+      <div class='span7 pull-left'>        
+          <label class="checkbox">
+            <input id="id_buy2" name="buy2" type="checkbox" {% if formvalues.buy2 %} checked {% endif %}/>
+            Option one is this and that—be sure to include why it's great
+          </label>
+      </div>
+    </div>
+    <div class='row'>
+      <div class="input-prepend span3 offset2">
+        <span class="add-on">$</span>
+        <input id="appendedPrependedInput" type="text" class='input-small' value='0' disabled>
+      </div>
+      <div class='span7 pull-left'>        
+          <label class="checkbox">
+            <input id="id_buy3" name="buy3" type="checkbox" {% if formvalues.buy3 %} checked {% endif %}/>
+            Option one is this and that—be sure to include why it's great
+          </label>
+      </div>
+    </div>
+    <div class='row'>
+      <div class="input-prepend span3 offset2">
+        <span class="add-on">$</span>
+        <input id="appendedPrependedInput" type="text" class='input-small' value='0' disabled>
+      </div>
+      <div class='span7 pull-left'>        
+          <label class="checkbox">
+            <input id="id_buy4" name="buy4" type="checkbox" {% if formvalues.buy4 %} checked {% endif %}/>
+            Option one is this and that—be sure to include why it's great
+          </label>
+      </div>
+    </div>
+
+          <h6>Region Data</h6>
+
+    <div class='row'>
+      <div class="input-prepend span3 offset2">
+        <span class="add-on">$</span>
+        <input id="appendedPrependedInput" type="text" class='input-small' value='0' disabled>
+      </div>
+      <div class='span7 pull-left'>        
+          <label class="checkbox">
+            <input id="id_buyNA" name="buyNA" type="checkbox" {% if formvalues.buyNA %} checked {% endif %}/>
+            North America
+          </label>
+      </div>
+    </div>
+    <div class='row'>
+      <div class="input-prepend span3 offset2">
+        <span class="add-on">$</span>
+        <input id="appendedPrependedInput" type="text" class='input-small' value='0' disabled>
+      </div>
+      <div class='span7 pull-left'>        
+          <label class="checkbox">
+            <input id="id_buySA" name="buySA" type="checkbox" {% if formvalues.buySA %} checked {% endif %}/>
+            South America
+          </label>
+      </div>
+    </div>
+    <div class='row'>
+      <div class="input-prepend span3 offset2">
+        <span class="add-on">$</span>
+        <input id="appendedPrependedInput" type="text" class='input-small' value='0' disabled>
+      </div>
+      <div class='span7 pull-left'>        
+          <label class="checkbox">
+            <input id="id_buyEE" name="buyEE" type="checkbox" {% if formvalues.buyEE %} checked {% endif %}/>
+            Eastern Europe
+          </label>
+      </div>
+    </div>
+    <div class='row'>
+      <div class="input-prepend span3 offset2">
+        <span class="add-on">$</span>
+        <input id="appendedPrependedInput" type="text" class='input-small' value='0' disabled>
+      </div>
+      <div class='span7 pull-left'>        
+          <label class="checkbox">
+            <input id="id_buyWE" name="buyWE" type="checkbox" {% if formvalues.buyWE %} checked {% endif %}/>
+            Western Europe
+          </label>
+      </div>
+    </div>
+    <div class='row'>
+      <div class="input-prepend span3 offset2">
+        <span class="add-on">$</span>
+        <input id="appendedPrependedInput" type="text" class='input-small' value='0' disabled>
+      </div>
+      <div class='span7 pull-left'>        
+          <label class="checkbox">
+            <input id="id_buyNE" name="buyNE" type="checkbox" {% if formvalues.buyNE %} checked {% endif %}/>
+            Northern Europe
+          </label>
+      </div>
+    </div>
+    <div class='row'>
+      <div class="input-prepend span3 offset2">
+        <span class="add-on">$</span>
+        <input id="appendedPrependedInput" type="text" class='input-small' value='0' disabled>
+      </div>
+      <div class='span7 pull-left'>        
+          <label class="checkbox">
+            <input id="id_buyWA" name="buyWA" type="checkbox" {% if formvalues.buyWA %} checked {% endif %}/>
+            Western Asia
+          </label>
+      </div>
+    </div>
+    <div class='row'>
+      <div class="input-prepend span3 offset2">
+        <span class="add-on">$</span>
+        <input id="appendedPrependedInput" type="text" class='input-small' value='0' disabled>
+      </div>
+      <div class='span7 pull-left'>        
+          <label class="checkbox">
+            <input id="id_buyEA" name="buyEA" type="checkbox" {% if formvalues.buyEA %} checked {% endif %}/>
+            East Asia
+          </label>
+      </div>
+    </div>
+          <h6>Special Reports</h6>
+    <div class='row'>
+      <div class="input-prepend span3 offset2">
+        <span class="add-on">$</span>
+        <input id="appendedPrependedInput" type="text" class='input-small' value='0' disabled>
+      </div>
+      <div class='span7 pull-left'>        
+          <label class="checkbox">
+            <input id="id_buy5" name="buy5" type="checkbox" {% if formvalues.buy5 %} checked {% endif %}/>
+            Market Trends- Products
+          </label>
+      </div>
+    </div>
+    <div class='row'>
+      <div class="input-prepend span3 offset2">
+        <span class="add-on">$</span>
+        <input id="appendedPrependedInput" type="text" class='input-small' value='0' disabled>
+      </div>
+      <div class='span7 pull-left'>        
+          <label class="checkbox">
+            <input id="id_buy6" name="buy6" type="checkbox" {% if formvalues.buy6 %} checked {% endif %}/>
+            Raw Material Reports
+          </label>
+      </div>
+    </div>
+    <div class='row'>
+      <div class="input-prepend span3 offset2">
+        <span class="add-on">$</span>
+        <input id="appendedPrependedInput" type="text" class='input-small' value='0' disabled>
+      </div>
+      <div class='span7 pull-left'>        
+          <label class="checkbox">
+            <input id="id_buy7" name="buy7" type="checkbox" {% if formvalues.buy7 %} checked {% endif %}/>
+            Customer Satisfaction Survey
+          </label>
+      </div>
+    </div>
+  </div>
+  </div>
+  <input type="submit" value= "Update" name="add" class="btn"/>
+</form>
+
+
+
+
+
+
+
+
+
+      </div></div>
+
+
+
+<script type="text/javascript">
+// change empty form fields to 0
+$('#decisionform').submit(function() {
+  $(":text").each(function() {
+     if($(this).val() === ""){
+        $(this).val('0');
+      }
+  });
+});
+</script>
+
+{% endblock %}

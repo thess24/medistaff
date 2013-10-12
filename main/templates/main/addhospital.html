@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+
+{% block title %}System Overview{% endblock%}
+
+{% block content %}
+
+  <div class="page-header position-relative">
+    <h1>Add a {{whattoadd}}</h1>
+  </div><!-- /.page-header -->
+
+<div class="row">
+  <div class="span12">
+    <div class='alert alert-success' {% if not submitted %} hidden {% endif %}><button type="button" class="close" data-dismiss="alert">&times;</button>You submitted a {{whattoadd}}!</div>
+    <div class='span12'>
+       <form method='post' >{% csrf_token %}
+        {{form.as_p}}
+        <input type='submit' class='btn btn-small'>
+       </form>
+    </div>
+
+    <h4 class="header smaller lighter blue">Current {{whattoadd}}s</h4>
+    <ul>
+      {% for u in units %}<li>{{u.name}}</li>{% endfor %}
+    </ul>
+  </div>
+</div>
+
+{% endblock %} 
+

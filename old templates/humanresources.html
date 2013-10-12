@@ -1,0 +1,226 @@
+{% extends "decisionarea.html" %}
+
+{% block title %}Quarter Info{% endblock%}
+
+{% block content %}
+
+  <div class='span9'>
+
+    <div class='row'>
+      <div class='span11 offset1'>
+          <h2>Human Resources</h2>
+      </div>
+    </div>
+    <hr>
+
+<!-- {{HRForm.as_p}} -->
+
+<form method="post" id='decisionform'> {% csrf_token %}
+
+<!-- Customer Service -->
+    <div class='row'>
+      <div class='span11 offset1'>
+          <h4>Customer Service</h4> 
+      </div>
+    </div>
+    <div class='row'> 
+    <div class="input-prepend span3 offset2">
+      <span class="add-on">$</span>
+      <input id="id_cscharity" name="cscharity" type="text" class='input-small' value='{{formvalues.cscharity}}'/>
+    </div>
+    <div class='span7'>Donate money to charity</div>
+    </div>
+    <div class='row'>
+    <div class="input-prepend span3 offset2">
+      <span class="add-on">$</span>
+      <input id="id_csenivro" name="csenivro" type="text" class='input-small' value='{{formvalues.csenivro}}'/>
+    </div>
+    <div class='span7'>Host event to save environment</div>
+    </div>
+    <div class='row'>
+    <div class="input-prepend span3 offset2">
+      <span class="add-on">$</span>
+      <input id="id_cs3rdworld" name="cs3rdworld" type="text" class='input-small' value='{{formvalues.cs3rdworld}}'/>
+    </div>
+    <div class='span7'>Fight for working conditions in 3rd world countries</div>
+    </div>
+
+
+<!-- Sales Training -->
+     <div class='row'>
+      <div class='span11 offset1'>
+          <h4>Sales Training</h4>
+      </div>
+    </div><div class='row'>
+      <div class='span10 offset2'>
+          <h6>Global Training</h6>
+      </div>
+    </div>
+    <div class='row'>
+      <div class="input-prepend span3 offset2">
+        <span class="add-on">$</span>
+        <input id="appendedPrependedInput" type="text" class='input-small' value='0' disabled>
+      </div>
+      <div class='span7 pull-left'>        
+          <label class="checkbox">
+            <input id="id_salesproc" name="salesproc" type="checkbox" {% if formvalues.salesproc %} checked {% endif %}/>
+            Lay out a series of procedures to train new hires on sales techniques
+          </label>
+      </div>
+    </div>
+    <div class='row'>
+      <div class="input-prepend span3 offset2">
+        <span class="add-on">$</span>
+        <input id="appendedPrependedInput" type="text" class='input-small' value='0' disabled>
+      </div>
+      <div class='span7 pull-left'>        
+          <label class="checkbox">
+            <input id="id_salesett" name="salesett" type="checkbox" {% if formvalues.salesett %} checked {% endif %} />
+            Train all sales employees on proper ettiquete and business ethics
+          </label>
+      </div>
+    </div>
+
+    <div class='row'>
+      <div class='span10 offset2'>
+          <h6>Local Sales Training</h6>
+      </div>
+    </div>
+    <div class='row'>
+      <div class="input-prepend span3 offset2">
+        <span class="add-on">$</span>
+        <input id="appendedPrependedInput" type="text" class='input-small' value='0' disabled>
+      </div>
+      <div class='span7 pull-left'>        
+          <label class="checkbox">
+            <input id="id_salesNA" name="salesNA" type="checkbox"  {% if formvalues.salesNA %} checked {% endif %}/>
+            North America
+          </label>
+      </div>
+    </div>
+    <div class='row'>
+      <div class="input-prepend span3 offset2">
+        <span class="add-on">$</span>
+        <input id="appendedPrependedInput" type="text" class='input-small' value='0' disabled>
+      </div>
+      <div class='span7 pull-left'>        
+          <label class="checkbox">
+            <input id="id_salesSA" name="salesSA" type="checkbox" {% if formvalues.salesSA %} checked {% endif %}/>
+            South America
+          </label>
+      </div>
+    </div>
+    <div class='row'>
+      <div class="input-prepend span3 offset2">
+        <span class="add-on">$</span>
+        <input id="appendedPrependedInput" type="text" class='input-small' value='0' disabled>
+      </div>
+      <div class='span7 pull-left'>        
+          <label class="checkbox">
+            <input id="id_salesEE" name="salesEE" type="checkbox" {% if formvalues.salesEE %} checked {% endif %}/>
+            Eastern Europe
+          </label>
+      </div>
+    </div>
+    <div class='row'>
+      <div class="input-prepend span3 offset2">
+        <span class="add-on">$</span>
+        <input id="appendedPrependedInput" type="text" class='input-small' value='0' disabled>
+      </div>
+      <div class='span7 pull-left'>        
+          <label class="checkbox">
+            <input id="id_salesWE" name="salesWE" type="checkbox" {% if formvalues.salesWE %} checked {% endif %}/>
+            Western Europe
+          </label>
+      </div>
+    </div>
+    <div class='row'>
+      <div class="input-prepend span3 offset2">
+        <span class="add-on">$</span>
+        <input id="appendedPrependedInput" type="text" class='input-small' value='0' disabled>
+      </div>
+      <div class='span7 pull-left'>        
+          <label class="checkbox">
+            <input id="id_salesNE" name="salesNE" type="checkbox" {% if formvalues.salesNE %} checked {% endif %}/>
+            Northern Europe
+          </label>
+      </div>
+    </div>
+    <div class='row'>
+      <div class="input-prepend span3 offset2">
+        <span class="add-on">$</span>
+        <input id="appendedPrependedInput" type="text" class='input-small' value='0' disabled>
+      </div>
+      <div class='span7 pull-left'>        
+          <label class="checkbox">
+            <input id="id_salesWA" name="salesWA" type="checkbox" {% if formvalues.salesWA %} checked {% endif %}/>
+            Western Asia
+          </label>
+      </div>
+    </div>
+    <div class='row'>
+      <div class="input-prepend span3 offset2">
+        <span class="add-on">$</span>
+        <input id="appendedPrependedInput" type="text" class='input-small' value='0' disabled>
+      </div>
+      <div class='span7 pull-left'>        
+          <label class="checkbox">
+            <input id="id_salesEA" name="salesEA" type="checkbox" {% if formvalues.salesNA %} checked {% endif %}/>
+            East Asia
+          </label>
+      </div>
+    </div>
+    <div class='span11 offset1'><input type="submit" value= "Update" name="add" class="btn"/></div>
+  </form>
+<!-- Hire new talent -->
+     <div class='row'>
+      <div class='span11 offset1'>
+          <h4>Talent</h4>
+      </div>
+    </div>
+    <div class='row'>
+      <div class='span11 offset1'>
+        <table class="table table-hover">
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Salary</th>
+                <th>Specialty</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for t in talenthired %}
+              <tr>
+                <td>{{t.name}}</td>
+                <td>${{t.salary}}</td>
+                <td>{{t.specialty}}</td>
+                <td><a href=''>see details</a></td>
+              </tr>
+              {% endfor %}
+              <tr>
+                <td><a href="hire"><i class='icon-plus'></i> Add New Talent</a></td>
+                <td></td>
+                <td></td>
+                <td></td>
+              </tr>
+            </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  
+
+  <script type="text/javascript">
+// change empty form fields to 0
+$('#decisionform').submit(function() {
+  $(":text").each(function() {
+     if($(this).val() === ""){
+        $(this).val('0');
+      }
+  });
+});
+</script>
+
+{% endblock %}

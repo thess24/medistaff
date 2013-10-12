@@ -1,0 +1,109 @@
+{% extends "base.html" %}
+
+{% block title %}Add OpenShift{% endblock%}
+
+{% block content %}
+
+          <div class="page-header position-relative">
+            <h1>
+              Nurse Filter
+              <small>
+                <i class="icon-double-angle-right"></i>
+                Find Nurses meeting certain criteria
+              </small>
+            </h1>
+          </div><!-- /.page-header -->
+
+
+<div class="row-fluid">
+  <div class='span12'>
+
+          <form method='post' class='form-inline'>
+          <tr>
+            <th><label for="id_start">Hospital:</label></th>
+            <td><input class='' id="id_hospital" name="start" type="text" /></td>
+          </tr>
+          <tr>
+            <th><label for="id_start">Unit:</label></th>
+            <td><input class='i' id="id_unit" name="start" type="text" /></td>
+          </tr>
+          <tr>
+            <th><label for="id_start">Job:</label></th>
+            <td><input class='i' id="id_job" name="start" type="text" /></td>
+          </tr>
+          <tr>
+            <th><label for="id_start">Start:</label></th>
+            <td><input class='input-datetime' id="id_start" name="start" type="text" /></td>
+          </tr>
+          <tr><th><label for="id_end">End:</label></th><td>
+            <input class='input-datetime' id="id_end" name="end" type="text" /></td>
+          </tr>
+          <input type='submit' class='btn btn-small'>
+          </form>
+
+
+
+          <table id="sample-table-1" class="table table-striped table-bordered table-hover">
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Hospital</th>
+                <th>Unit</th>
+                <th>Job</th>
+                <th>Email</th>
+                <th>...</th>
+              </tr>
+            </thead> 
+
+              <tbody>
+                  {% for u in userlist %}
+                  <tr>
+                    <td>{{u.first_name}} {{u.last_name}}</td>
+                    <td>{{u.homehospital}}</td>
+                    <td>{{u.homeunit}}</td>
+                    <td>{{u.jobtype}}</td>
+                    <td>{{u.email}}</td>
+                    <td>More</td>
+                  </tr>
+                  {% empty %}
+                  <tr><td colspan='10'>No open shifts at this time! Check back soon.</td></tr>
+                  {% endfor %}
+              </tbody>
+          </table>
+  </div>
+</div>
+
+{% endblock %} 
+
+
+{% block extrascripts %}{%load staticfiles%}
+
+<script src="{% static 'main/jquery-ui.js' %}"></script>
+<script src="{% static 'main/jquery-ui-timepicker-addon.js' %}"></script> 
+
+<style type="text/css">
+.ui-slider-handle{
+  position: relative;
+}
+
+.ui-datepicker{
+  border: 0px;
+}
+</style>
+
+
+<script type="text/javascript">
+
+
+$(function() {
+    $('#id_start').datetimepicker({dateFormat: "yy-mm-dd", timeFormat: 'HH:mm', stepMinute:15});
+    $('#id_end').datetimepicker({dateFormat: "yy-mm-dd", timeFormat: 'HH:mm', stepMinute:15});
+  });
+
+</script>
+
+{% endblock %}
+
+
+
+

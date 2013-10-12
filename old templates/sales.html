@@ -1,0 +1,338 @@
+{% extends "decisionarea.html" %}
+
+{% block title %}Sales Info{% endblock %}
+
+{% block head %}
+<script src="/static/main/jquery-jvectormap-1.2.2.min.js"></script>
+<link type="text/css" rel="stylesheet" href="/static/main/jquery-jvectormap-1.2.2.css" media='screen' />
+<script src="/static/main/jquery-jvectormap-world-mill-en.js"></script>
+
+
+<script type="text/javascript">
+
+$(function(){
+  $('#world-map-markers').vectorMap({
+    map: 'world_mill_en',
+    scaleColors: ['#C8EEFF', '#0071A4'],
+    normalizeFunction: 'polynomial',
+    hoverOpacity: 0.7,
+    hoverColor: false,
+    markerStyle: {
+      initial: {
+        fill: '#F8E23B', 
+        stroke: '#383f47'
+      }
+    },
+    backgroundColor: '#383f47',
+    markers: [
+      {latLng: [40.71, -74.00], name: 'New York City'},
+      {latLng: [41.85, -87.65], name: 'Chicago'},
+      {latLng: [43.65, -79.40], name: 'Toronto'},
+      {latLng: [34.05, -118.24], name: 'Los Angeles'},
+    ]
+  });
+});
+
+</script> 
+{% endblock %}
+
+{% block content %}
+
+  <div class='span9'>
+
+    <div class='row'>
+      <div class='span11 offset1'>
+          <h2>Selling Locations</h2>
+      </div>
+    </div>
+    <hr>
+  <div class='row'>
+  <div class='span11 offset1'id="world-map-markers" style="width: 600px; height: 400px"></div>
+  </div>
+  <br>
+
+  <!-- {{SalesForm.as_p}} -->
+  {{errors}}
+<form method="post" id='decisionform'> {% csrf_token %}
+    <div class='row'>
+      <div class='span11 offset1'>
+        <table class="table table-hover">
+            <thead>
+              <tr>
+                <th>Region</th>
+                <th>Distributors</th>
+                <th>Sales Reps</th>
+                <th>Direct (online)</th>
+                <th>Customer Service Reps</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th><i class='icon-plus'></i>North America</th>
+                <td><input class="input-mini" id="disabledInput" type="text" value='0' disabled></td>
+                <td><input class="input-mini" id="disabledInput" type="text" value='0' disabled></td>
+                <td><input type="text" class='input-mini' style='margin-bottom:0px' id="id_directNA" name="directNA" value="{{formvalues.directNA}}"></td>
+                <td><input type="text" class='input-mini' style='margin-bottom:0px' id="id_csNA" name="csNA" value="{{formvalues.csNA}}"></td>
+              </tr>
+              <tr>
+                <td>Los Angeles</td>
+                <td><input type="text" class='input-mini' style='margin-bottom:0px' id="id_distributor1" name="distributor1" value='{{formvalues.distributor1}}'></td>
+                <td><input type="text" class='input-mini' style='margin-bottom:0px' id="id_salesrep1" name="salesrep1" value='{{formvalues.salesrep1}}'></td>
+                <td></td>
+                <td></td>
+              </tr>
+              <tr>
+                <td>New York</td>
+                <td><input type="text" class='input-mini' style='margin-bottom:0px' id="id_distributor2" name="distributor2" value='{{formvalues.distributor2}}'></td>
+                <td><input type="text" class='input-mini' style='margin-bottom:0px' id="id_salesrep2" name="salesrep2" value='{{formvalues.salesrep2}}'></td>
+                <td></td>
+                <td></td>
+              </tr>
+              <tr>
+                <td>Chicago</td>
+                <td><input type="text" class='input-mini' style='margin-bottom:0px' id="id_distributor3" name="distributor3" value='{{formvalues.distributor3}}'></td>
+                <td><input type="text" class='input-mini' style='margin-bottom:0px' id="id_salesrep3" name="salesrep3" value='{{formvalues.salesrep3}}'></td>
+                <td></td>
+                <td></td>
+              </tr>
+              <tr>
+                <td>Toronto</td>
+                <td><input type="text" class='input-mini' style='margin-bottom:0px' id="id_distributor4" name="distributor4" value='{{formvalues.distributor4}}'></td>
+                <td><input type="text" class='input-mini' style='margin-bottom:0px' id="id_salesrep4" name="salesrep4" value='{{formvalues.salesrep4}}'></td>
+                <td></td>
+                <td></td>
+              </tr>
+
+              <tr>
+                <th><i class='icon-plus'></i>South America</th>
+                <td><input class="input-mini" id="disabledInput" type="text" value='0' disabled></td>
+                <td><input class="input-mini" id="disabledInput" type="text" value='0' disabled></td>
+                <td><input type="text" class='input-mini' style='margin-bottom:0px' id="id_directSA" name="directSA" value="{{formvalues.directSA}}"></td>
+                <td><input type="text" class='input-mini' style='margin-bottom:0px' id="id_csSA" name="csSA" value="{{formvalues.csSA}}"></td>
+              </tr>
+              <tr>
+                <td>Sao Paulo</td>
+                <td><input type="text" class='input-mini' style='margin-bottom:0px' id="id_distributor5" name="distributor5" value='{{formvalues.distributor5}}'></td>
+                <td><input type="text" class='input-mini' style='margin-bottom:0px' id="id_salesrep5" name="salesrep5" value='{{formvalues.salesrep5}}'></td>
+                <td></td>
+                <td></td>
+              </tr>
+              <tr>
+                <td>Bogota</td>
+                <td><input type="text" class='input-mini' style='margin-bottom:0px' id="id_distributor6" name="distributor6" value='{{formvalues.distributor6}}'></td>
+                <td><input type="text" class='input-mini' style='margin-bottom:0px' id="id_salesrep6" name="salesrep6" value='{{formvalues.salesrep6}}'></td>
+                <td></td>
+                <td></td>
+              </tr>
+              <tr>
+                <td>Lima</td>
+                <td><input type="text" class='input-mini' style='margin-bottom:0px' id="id_distributor7" name="distributor7" value='{{formvalues.distributor7}}'></td>
+                <td><input type="text" class='input-mini' style='margin-bottom:0px' id="id_salesrep7" name="salesrep7" value='{{formvalues.salesrep7}}'></td>
+                <td></td>
+                <td></td>
+              </tr>
+
+
+              <tr>
+                <th><i class='icon-plus'></i>Eastern Europe</th>
+                <td><input class="input-mini" id="disabledInput" type="text" value='0' disabled></td>
+                <td><input class="input-mini" id="disabledInput" type="text" value='0' disabled></td>
+                <td><input type="text" class='input-mini' style='margin-bottom:0px' id="id_directEE" name="directEE" value="{{formvalues.directEE}}"></td>
+                <td><input type="text" class='input-mini' style='margin-bottom:0px' id="id_csEE" name="csEE" value="{{formvalues.csEE}}"></td>
+              </tr>
+              <tr>
+                <td>Moscow</td>
+                <td><input type="text" class='input-mini' style='margin-bottom:0px' id="id_distributor8" name="distributor8" value='{{formvalues.distributor8}}'></td>
+                <td><input type="text" class='input-mini' style='margin-bottom:0px' id="id_salesrep8" name="salesrep8" value='{{formvalues.salesrep8}}'></td>
+                <td></td>
+                <td></td>
+              </tr>
+              <tr>
+                <td>Kiev</td>
+                <td><input type="text" class='input-mini' style='margin-bottom:0px' id="id_distributor9" name="distributor9" value='{{formvalues.distributor9}}'></td>
+                <td><input type="text" class='input-mini' style='margin-bottom:0px' id="id_salesrep9" name="salesrep9" value='{{formvalues.salesrep9}}'></td>
+                <td></td>
+                <td></td>
+              </tr>
+              <tr>
+                <td>Brno</td>
+                <td><input type="text" class='input-mini' style='margin-bottom:0px' id="id_distributor10" name="distributor10" value='{{formvalues.distributor10}}'></td>
+                <td><input type="text" class='input-mini' style='margin-bottom:0px' id="id_salesrep10" name="salesrep10" value='{{formvalues.salesrep10}}'></td>
+                <td></td>
+                <td></td>
+              </tr>
+
+              <tr>
+                <th><i class='icon-plus'></i>Western Europe</th>
+                <td><input class="input-mini" id="disabledInput" type="text" value='0' disabled></td>
+                <td><input class="input-mini" id="disabledInput" type="text" value='0' disabled></td>
+                <td><input type="text" class='input-mini' style='margin-bottom:0px' id="id_directWE" name="directWE" value="{{formvalues.directWE}}"></td>
+                <td><input type="text" class='input-mini' style='margin-bottom:0px' id="id_csWE" name="csWE" value="{{formvalues.csWE}}"></td>
+              </tr>
+              <tr>
+                <td>London</td>
+                <td><input type="text" class='input-mini' style='margin-bottom:0px' id="id_distributor11" name="distributor11" value='{{formvalues.distributor11}}'></td>
+                <td><input type="text" class='input-mini' style='margin-bottom:0px' id="id_salesrep11" name="salesrep11" value='{{formvalues.salesrep11}}'></td>
+                <td></td>
+                <td></td>
+              </tr>
+              <tr>
+                <td>Rome</td>
+                <td><input type="text" class='input-mini' style='margin-bottom:0px' id="id_distributor12" name="distributor12" value='{{formvalues.distributor12}}'></td>
+                <td><input type="text" class='input-mini' style='margin-bottom:0px' id="id_salesrep12" name="salesrep12" value='{{formvalues.salesrep12}}'></td>
+                <td></td>
+                <td></td>
+              </tr>
+              <tr>
+                <td>Berlin</td>
+                <td><input type="text" class='input-mini' style='margin-bottom:0px'></td>
+                <td><input type="text" class='input-mini' style='margin-bottom:0px'></td>
+                <td></td>
+                <td></td>
+              </tr>
+
+              <tr>
+                <th><i class='icon-plus'></i>Northern Europe</th>
+                <td><input class="input-mini" id="disabledInput" type="text" value='0' disabled></td>
+                <td><input class="input-mini" id="disabledInput" type="text" value='0' disabled></td>
+                <td><input type="text" class='input-mini' style='margin-bottom:0px' id="id_directNE" name="directNE" value="{{formvalues.directNE}}"></td>
+                <td><input type="text" class='input-mini' style='margin-bottom:0px' id="id_csNE" name="csNE" value="{{formvalues.csNE}}"></td>
+              </tr>
+              <tr>
+                <td>Copenhagen</td>
+                <td><input type="text" class='input-mini' style='margin-bottom:0px' id="id_distributor13" name="distributor13" value='{{formvalues.distributor13}}'></td>
+                <td><input type="text" class='input-mini' style='margin-bottom:0px' id="id_salesrep13" name="salesrep13" value='{{formvalues.salesrep13}}'></td>
+                <td></td>
+                <td></td>
+              </tr>
+              <tr>
+                <td>Dublin</td>
+                <td><input type="text" class='input-mini' style='margin-bottom:0px' id="id_distributor14" name="distributor14" value='{{formvalues.distributor14}}'></td>
+                <td><input type="text" class='input-mini' style='margin-bottom:0px' id="id_salesrep14" name="salesrep14" value='{{formvalues.salesrep14}}'></td>
+                <td></td>
+                <td></td>
+              </tr>
+              <tr>
+                <td>Oslo</td>
+                <td><input type="text" class='input-mini' style='margin-bottom:0px'></td>
+                <td><input type="text" class='input-mini' style='margin-bottom:0px'></td>
+                <td></td>
+                <td></td>
+              </tr>
+
+              <tr>
+                <th><i class='icon-plus'></i>Southern/Western Asia</th>
+                <td><input class="input-mini" id="disabledInput" type="text" value='0' disabled></td>
+                <td><input class="input-mini" id="disabledInput" type="text" value='0' disabled></td>
+                <td><input type="text" class='input-mini' style='margin-bottom:0px' id="id_directWA" name="directWA" value="{{formvalues.directWA}}"></td>
+                <td><input type="text" class='input-mini' style='margin-bottom:0px' id="id_csWA" name="csWA" value="{{formvalues.csWA}}"></td>
+              </tr>
+              <tr>
+                <td>Istanbul</td>
+                <td><input type="text" class='input-mini' style='margin-bottom:0px' id="id_distributor15" name="distributor15" value='{{formvalues.distributor15}}'></td>
+                <td><input type="text" class='input-mini' style='margin-bottom:0px' id="id_salesrep15" name="salesrep15" value='{{formvalues.salesrep15}}'></td>
+                <td></td>
+                <td></td>
+              </tr>
+              <tr>
+                <td>Mumbai</td>
+                <td><input type="text" class='input-mini' style='margin-bottom:0px' id="id_distributor16" name="distributor16" value='{{formvalues.distributor16}}'></td>
+                <td><input type="text" class='input-mini' style='margin-bottom:0px' id="id_salesrep16" name="salesrep16" value='{{formvalues.salesrep16}}'></td>
+                <td></td>
+                <td></td>
+              </tr>
+
+              <tr>
+                <th><i class='icon-plus'></i>East Asia</th>
+                <td><input class="input-mini" id="disabledInput" type="text" value='0' disabled></td>
+                <td><input class="input-mini" id="disabledInput" type="text" value='0' disabled></td>
+                <td><input type="text" class='input-mini' style='margin-bottom:0px' id="id_directEA" name="directEA" value="{{formvalues.directEA}}"></td>
+                <td><input type="text" class='input-mini' style='margin-bottom:0px' id="id_csEA" name="csEA" value="{{formvalues.csEA}}"></td>
+              </tr>
+              <tr>
+                <td>Hong Kong</td>
+                <td><input type="text" class='input-mini' style='margin-bottom:0px' id="id_distributor17" name="distributor17" value='{{formvalues.distributor17}}'></td>
+                <td><input type="text" class='input-mini' style='margin-bottom:0px' id="id_salesrep17" name="salesrep17" value='{{formvalues.salesrep17}}'></td>
+                <td></td>
+                <td></td>
+              </tr>
+              <tr>
+                <td>Tokyo</td>
+                <td><input type="text" class='input-mini' style='margin-bottom:0px' id="id_distributor18" name="distributor18" value='{{formvalues.distributor18}}'></td>
+                <td><input type="text" class='input-mini' style='margin-bottom:0px' id="id_salesrep18" name="salesrep18" value='{{formvalues.salesrep18}}'></td>
+                <td></td>
+                <td></td>
+              </tr>
+              <tr>
+                <td>Seoul</td>
+                <td><input type="text" class='input-mini' style='margin-bottom:0px' id="id_distributor19" name="distributor19" value='{{formvalues.distributor19}}'></td>
+                <td><input type="text" class='input-mini' style='margin-bottom:0px' id="id_salesrep19" name="salesrep19" value='{{formvalues.salesrep19}}'></td>
+                <td></td>
+                <td></td>
+              </tr>
+
+
+            </tbody>
+        </table>
+      </div>
+      <input type="submit" value= "Update" name="add" class="btn"/>
+    </div>
+  </form>
+
+<script type="text/javascript">
+// change empty form fields to 0
+$('#decisionform').submit(function() {
+  $(":text").each(function() {
+     if($(this).val() === ""){
+        $(this).val('0');
+      }
+  });
+});
+</script>
+
+<!--     <div class='row'>
+      <div class='span11 offset1'>
+          <h4>North America</h4>
+      </div>
+    </div>
+
+    <div class='row'>
+      <div class='span11 offset1'>
+          <h4>South America</h4>
+      </div>
+    </div>
+
+    <div class='row'>
+      <div class='span11 offset1'>
+          <h4>Eastern Europe</h4>
+      </div>
+    </div>
+
+    <div class='row'>
+      <div class='span11 offset1'>
+          <h4>Northern Europe</h4>
+      </div>
+    </div>
+
+    <div class='row'>
+      <div class='span11 offset1'>
+          <h4>Western Europe</h4>
+      </div>
+    </div>
+
+    <div class='row'>
+      <div class='span11 offset1'>
+          <h4>Western Asia</h4>
+      </div>
+    </div>
+
+    <div class='row'>
+      <div class='span11 offset1'>
+          <h4>East Asia</h4>
+      </div>
+    </div> -->
+
+  </div>
+
+
+{% endblock %}

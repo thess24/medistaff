@@ -1,0 +1,72 @@
+{% extends "base.html" %}
+
+{% block title %}System Overview{% endblock%}
+
+{% block content %}
+
+          <div class="page-header position-relative">
+            <h1>
+              Home
+              <small>
+                <i class="icon-double-angle-right"></i>
+                Welcome, {{user.first_name}}
+              </small>
+            </h1>
+          </div><!-- /.page-header -->
+
+  <div class="row-fluid">
+    <div class="span12">
+      <!-- PAGE CONTENT BEGINS -->
+
+      <div class="row-fluid">
+        <div class="span12">
+          <h4 class="header smaller lighter blue">My Shifts</h4>
+          <table id="sample-table-1" class="table table-striped table-bordered table-hover">
+            <thead>
+              <tr>
+                <th>Location</th>
+                <th>Unit</th>
+                <th>Start Time</th>
+                <th>Finish Time</th>
+                <th>Hours Worked</th>
+              </tr>
+            </thead>
+            <tbody>
+              {%for wd in workday%}
+              <tr>
+                <td>{{wd.hospital}}</td>
+                <td>{{wd.unit}}</td>
+                <td>{{wd.start|time:"h:i a"}}</td>
+                <td>{{wd.end|time:"h:i a"}}</td>
+                <td>{{wd.hoursworked}}</td>
+              </tr>
+                {% endfor %}
+            </tbody>
+          </table>
+
+          <h4 class="header smaller lighter blue">My Subscriptions</h4>
+<!--           <table id="sample-table-1" class="table table-striped table-bordered table-hover">
+            <thead>
+              <tr>
+                <th></th>
+                <th>Location</th>
+                <th>Unit</th>
+              </tr>
+            </thead>
+            <tbody>
+              {%for wd in workday%}
+              <tr>
+                <td>{{wd.hospital}}</td>
+                <td>{{wd.unit}}</td>
+              </tr>
+                {% endfor %}
+            </tbody>
+          </table> -->
+
+          </div>
+        </div>
+    </div>
+  </div>
+
+{% endblock %} 
+

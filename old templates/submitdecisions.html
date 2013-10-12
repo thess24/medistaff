@@ -1,0 +1,29 @@
+{% extends "decisionarea.html" %}
+
+{% block title %}Quarter Info{% endblock%}
+
+{% block content %}
+
+  <div class='span9'>
+
+    <div class='row'>
+      <div class='span11 offset1'>
+          <h2>Submit</h2>
+      </div>
+    </div>
+    <hr>
+
+    <div class='row'>
+      <div class='span11 offset1'>
+      	<form method="post" id='decisionform'> {% csrf_token %}
+          Once you have reviewed the decisions for this quarter hit the 'submit' button below to send in your decisions.
+
+          <br><br>
+			<input type="submit" value= "Submit " name="add" class="btn btn-large btn-primary" />
+		</form>
+      </div>
+    </div>
+
+    
+  </div>
+{% endblock %}

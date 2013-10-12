@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+
+{% block title %}Select A Course{% endblock%}
+{% block head %}
+
+<style type="text/css">
+
+.coursebox:hover{
+	background-color: #E0E0E0;
+	font
+}
+</style>
+
+
+
+{% endblock%}
+
+
+{% block content %}
+    <div class="container">
+
+      <h2>My Courses</h2>
+      <div>
+        {% for group in groups %}
+        <div><a href="{% url 'coursehomepage' group.title %}">{{group.title}} {{group.created}}</a></div>
+        {% endfor %}
+      </div>
+
+
+
+    </div>
+
+
+
+{% endblock %}

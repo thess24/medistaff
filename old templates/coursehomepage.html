@@ -1,0 +1,65 @@
+{% extends "base.html" %}
+
+{% block title %}Select A Course{% endblock%}
+{% block head %}{% endblock%}
+
+
+{% block content %}
+
+
+    <div class="container">
+      <div class="row">
+        <h2 style='margin-bottom:0'>CourseName: {{course.name}}</h2>
+        <div style='margin-left:50px'>
+          <ul class="inline">
+            <li><b>{{course.school}}</b></li>
+            <li><b>{{course.teacher}}</b></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class='row'><div class='span12'><b>Course Description: </b></div><div class='span12'>{{course.description}}</div></div>
+
+      <div class='row'>
+        <div class='span12'>
+          <div>
+            <div><b><a href="{% url 'description' course.name course.latestquarter %}">Current Quarter: {{course.latestquarter}}</a></b></div>
+            <div><input type='submit' class='btn' value='Run Simulation and Move to Next Quarter'>  </div>
+          </div>
+          <div><b>Link to Quarters</b></div>
+          <ul class="inline">
+            <li><a href="{% url 'description' course.name 1 %}">1</a></li>
+            <li><a href="{% url 'description' course.name 2 %}">2</a></li>
+            <li><a href="{% url 'description' course.name 3 %}">3</a></li>
+            <li><a href="{% url 'description' course.name 4 %}">4</a></li>
+            <li><a href="{% url 'description' course.name 5 %}">5</a></li>
+            <li><a href="{% url 'description' course.name 6 %}">6</a></li>
+            <li><a href="{% url 'description' course.name 7 %}">7</a></li>
+            <li><a href="{% url 'description' course.name 8 %}">8</a></li>
+            <li><a href="{% url 'description' course.name 9 %}">9</a></li>
+            <li><a href="{% url 'description' course.name 10 %}">10</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div>
+        <div><b>Course Overview</b></div>
+      </div>
+
+      <div>
+        <div><b>Announcements</b></div>
+      </div>
+
+      <div>
+        <div><b>Class Discussion</b></div>
+      </div>
+
+        <div>
+          <div><b>Users</b></div>
+            {% for user in users %}
+            <div>{{user.username}}</div>
+            {% endfor %}
+        </div>
+      </div>
+
+{% endblock %}

@@ -1,0 +1,134 @@
+{% extends "decisionarea.html" %}
+
+{% block title %}Quarter Info{% endblock%}
+
+{% block content %}
+
+  <div class='span9'>
+
+    <div class='row'>
+      <div class='span11 offset1'>
+          <h2>New Advertisement</h2>
+      </div>
+    </div>
+    <hr>
+
+<form method="post" id='decisionform'> {% csrf_token %}
+
+    <div class='row'>{{errors}}
+      <div class='span11 offset1'>
+          <h4>Attributes</h4>
+    <p><label for="id_name">Name:</label> <input id="id_name" maxlength="500" name="name" type="text" /></p>
+    <label for="id_price">Price:</label><div class="input-prepend"><span class="add-on">$</span><input class="input-small" id="id_price" name="price" type="text" value="0" /></div>
+    </div></div>
+<br>
+    <div class='row'>
+      <div class='span2 offset1'><h5>Demographics</h5></div>
+      <div class='span9'>
+        <label class="checkbox">
+          <input id="id_att1" name="att1" type="checkbox" />
+          Option one is this and that—be sure to include why it's great
+        </label>
+        <label class="checkbox">
+          <input id="id_att2" name="att2" type="checkbox" /> 
+          Option two
+        </label>
+        <label class="checkbox">
+          <input id="id_att3" name="att3" type="checkbox" /> 
+          Option one is this and that—be sure to include why it's great
+        </label>
+        <label class="checkbox">
+          <input id="id_att4" name="att4" type="checkbox" /> 
+          Option two
+        </label></div></div>
+
+    <br>
+
+
+    <div class='row'>
+      <div class='span2 offset1'><h5>Form</h5></div>
+      <div class='span9'>
+        <label class="checkbox">
+          <input id="id_att5" name="att5" type="checkbox" /> 
+          Option one is this and that—be sure to include why it's great
+        </label>
+        <label class="checkbox">
+          <input id="id_att6" name="att6" type="checkbox" /> 
+          Option two
+        </label>
+        <label class="checkbox">
+          <input id="id_att7" name="att7" type="checkbox" /> 
+          Option one is this and that—be sure to include why it's great
+        </label>
+        <label class="checkbox">
+          <input id="id_att8" name="att8" type="checkbox" /> 
+          Option two
+        </label>
+        <label class="checkbox">
+          <input id="id_att9" name="att9" type="checkbox" /> 
+          Option one is this and that—be sure to include why it's great
+        </label></div></div>
+      <br>
+
+
+
+    <div class='row'>
+      <div class='span2 offset1'><h5>Target</h5></div>
+      <div class='span9'>
+        <label class="checkbox">
+          <input id="id_att10" name="att10" type="checkbox" /> 
+          Option one is this and that—be sure to include why it's great
+        </label>
+        <label class="checkbox">
+          <input id="id_att11" name="att11" type="checkbox" /> 
+          Option two
+        </label>
+        <label class="checkbox">
+          <input id="id_att12" name="att12" type="checkbox" /> 
+          Option one is this and that—be sure to include why it's great
+        </label>
+         <label class="checkbox">
+          <input id="id_att13" name="att13" type="checkbox" /> 
+          Option one is this and that—be sure to include why it's great
+        </label>
+        <label class="checkbox">
+          <input id="id_att14" name="att14" type="checkbox" /> 
+          Option two
+        </label>
+        <label class="checkbox">
+          <input id="id_att15" name="att15" type="checkbox" /> 
+          Option one is this and that—be sure to include why it's great
+        </label></div></div>
+      <br>
+
+    <div class='row'>
+      <div class='span2 offset1'><h5>Region</h5></div>
+      <div class='span9'>
+        <label class="checkbox">
+          <input id="id_att16" name="att16" type="checkbox" /> 
+          North America
+        </label>
+        <label class="checkbox">
+          <input id="id_att17" name="att17" type="checkbox" /> 
+          South America
+        </label>
+        <label class="checkbox">
+          <input id="id_att18" name="att18" type="checkbox" /> 
+          Northern Europe
+        </label>
+        <label class="checkbox">
+          <input id="id_att19" name="att19" type="checkbox" /> 
+          Eastern Europe
+        </label>
+        <label class="checkbox">
+          <input id="id_att20" name="att20" type="checkbox" /> 
+          Southern Europe
+        </label></div></div>
+      <br>
+
+
+      <div class='span11 offset1'><input type="submit" value= "Update" name="add" class="btn"/></div></div>
+  </form>
+
+
+{% endblock %}

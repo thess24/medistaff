@@ -1,0 +1,245 @@
+{% extends "base.html" %}{% load staticfiles %}
+
+{% block title %}{{unit.name}}{% endblock%}
+
+{% block content %}
+ 
+  <div class="page-header position-relative">
+    <h1>
+      {{hospital.name}}
+      <small>
+        <i class="icon-double-angle-right"></i>
+        {{unit.name}}
+      </small>
+    </h1>
+  </div><!-- /.page-header -->
+
+  <div class="row">
+    <div class='span4'><a href="schedule">Schedule</a></div>
+            <table class='table table-bordered table-hover'>
+                <thead>
+                  <tr>
+                    <th>Working</th>
+                    <th>Census</th>
+                    <th>Census Time</th>
+                    <th>Hours Schedule Today</th>
+                    <th>Average Historical</th>
+                    <th>HPPD</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>{{workers}}</td>
+                    <td>{{lastcensus.census}}</td>
+                    <td>{{lastcensus.time}}</td>
+                    <td>{{hourstoday.totalhours}}</td>
+                    <td></td>
+                    <td></td>
+                  </tr>
+                </today>
+              </table>
+          <div id ='chart1' class='span6 jqplot-target' style='height:200px'></div>
+          <div id='chart2' class='span6 jqpllt-target'style='height:200px'></div>
+          <div id ='chart3' class='span12 jqplot-target'style='height:250px'></div>
+  </div>
+<br>
+
+
+<div class='row'>
+     <table class='table table-bordered table-condensed table-hover'>
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Date</th>
+            <th>Start Time</th>
+            <th>Finish Time</th>
+            <th>Hours Worked</th>
+          </tr>
+        </thead>
+        <tbody>
+          {%for wd in workdaynow%}
+          <tr class='info'>
+            <td>{{wd.name}}</td>
+            <td>{{wd.start|date:"SHORT_DATE_FORMAT" }}</td>
+            <td>{{wd.start|time:"h:i a"}}</td>
+            <td>{{wd.end|time:"h:i a"}}</td>
+            <td>{{wd.hours}}</td>
+          </tr>
+          {% endfor %}
+          {%for wd in workdaylater%}
+          <tr>
+            <td>{{wd.name}}</td>
+            <td>{{wd.start|date:"SHORT_DATE_FORMAT" }}</td>
+            <td>{{wd.start|time:"h:i a"}}</td>
+            <td>{{wd.end|time:"h:i a"}}</td>
+            <td>{{wd.hours}}</td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+</div>
+{% endblock %}
+
+
+
+
+
+
+
+
+
+
+
+{% block extrascripts %}
+<link rel="stylesheet" type="text/css" href="{% static 'main/jqplot/dist/jquery.jqplot.min.css' %}" />
+<script type="text/javascript" src="{% static 'main/jqplot/dist/jquery.jqplot.min.js' %}"></script> 
+
+
+<script type="text/javascript" src="{% static 'main/jqplot/dist/plugins/jqplot.barRenderer.min.js' %}"></script> 
+<script type="text/javascript" src="{% static 'main/jqplot/dist/plugins/jqplot.pieRenderer.min.js' %}"></script> 
+<script type="text/javascript" src="{% static 'main/jqplot/dist/plugins/jqplot.categoryAxisRenderer.min.js' %}"></script> 
+<script type="text/javascript" src="{% static 'main/jqplot/dist/plugins/jqplot.pointLabels.min.js' %}"></script> 
+
+
+
+
+<script type="text/javascript">
+
+$(document).ready(function(){
+  var s1 = [2, 6, 7, 10];
+  var s2 = [7, 5, 3, 4];
+  var s3 = [14, 9, 3, 8];
+  plot3 = $.jqplot('chart1', [s1, s2, s3], {
+    title:'Staff Through Time', 
+    stackSeries: true,
+    grid: {
+        drawGridLines: false,        // wether to draw lines across the grid or not.
+        gridLineColor: '#cccccc',   // *Color of the grid lines.
+        background: '#ffffff',      // CSS color spec for background color of grid.
+        borderColor: '#999999',     // CSS color spec for border around grid.
+        shadow:false,
+        borderWidth: 0,
+    },
+    seriesColors: [ "#9DFF00", "#00E9FF", "#0069FF", "#9600FF", "#FF001E",
+        "#00FF62", "#FFAE00", "#d8b83f", "#FFF700", "#0085cc"],
+    captureRightClick: true,
+    seriesDefaults:{
+      renderer:$.jqplot.BarRenderer,
+      shadow:false,
+      rendererOptions: {
+          barMargin: 30,
+          highlightMouseDown: true   
+      },
+      pointLabels: {show: true}
+    },
+    axes: {
+      xaxis: { renderer: $.jqplot.CategoryAxisRenderer },
+      yaxis: { padMin: 0 }
+    },
+  });
+  // Bind a listener to the "jqplotDataClick" event.  Here, simply change
+  // the text of the info3 element to show what series and ponit were
+  // clicked along with the data for that point.
+  $('#chart3').bind('jqplotDataClick', 
+    function (ev, seriesIndex, pointIndex, data) {
+      $('#info3').html('series: '+seriesIndex+', point: '+pointIndex+', data: '+data);
+    }
+  ); 
+});
+
+
+
+// $(document).ready(function(){
+//   var data = [
+//     ['Heavy Industry', 12],['Retail', 9], ['Light Industry', 14], 
+//     ['Out of home', 16],['Commuting', 7], ['Orientation', 9]
+//   ];
+//   var plot1 = jQuery.jqplot ('pie1', [data], 
+//     { 
+//       seriesDefaults: {
+//         renderer: jQuery.jqplot.PieRenderer, 
+//         rendererOptions: {showDataLabels: true},
+//         shadow:false,
+//       }, 
+//       legend: { show:true, location: 'e' },
+//       grid: {
+//         drawGridLines: false,        // wether to draw lines across the grid or not.
+//         gridLineColor: '#cccccc',   // *Color of the grid lines.
+//         background: '#ffffff',      // CSS color spec for background color of grid.
+//         borderColor: '#999999',     // CSS color spec for border around grid.
+//         shadow:false,
+//         borderWidth: 0,
+//     },
+//       seriesColors: [ "#9DFF00", "#00E9FF", "#0069FF", "#9600FF", "#FF001E",
+//         "#00FF62", "#FFAE00", "#d8b83f", "#FFF700", "#0085cc"],
+//     }
+//   );
+// });
+
+
+
+$(document).ready(function(){
+  // Some simple loops to build up data arrays.
+  var cosPoints = [1,6,4,9];
+  var sinPoints = [2,3,4,1]; 
+  var powPoints1 = [5,8,1,7]; 
+  var powPoints2 = [2,2,6,1]; 
+
+  var plot3 = $.jqplot('chart2', [cosPoints, sinPoints, powPoints1, powPoints2], 
+    { 
+      title:'HPPD', 
+      seriesColors: [ "#9DFF00", "#00E9FF", "#0069FF", "#9600FF", "#FF001E",
+        "#00FF62", "#FFAE00", "#d8b83f", "#FFF700", "#0085cc"],
+      grid: {
+        drawGridLines: false,        // wether to draw lines across the grid or not.
+        gridLineColor: '#cccccc',   // *Color of the grid lines.
+        background: '#ffffff',      // CSS color spec for background color of grid.
+        borderColor: '#999999',     // CSS color spec for border around grid.
+        shadow: false,
+        borderWidth: 0,
+    },
+      seriesDefaults: {
+          rendererOptions: {
+              shadow:false,
+          }
+      },
+    }
+  );
+});
+
+
+$(document).ready(function(){
+  // Some simple loops to build up data arrays.
+  var cosPoints = [1,6,4,9];
+  var sinPoints = [2,3,4,1]; 
+  var powPoints1 = [5,8,1,7]; 
+  var powPoints2 = [2,2,6,1]; 
+
+  var plot3 = $.jqplot('chart3', [cosPoints, sinPoints, powPoints1, powPoints2], 
+    { 
+      title:'Census Through Time', 
+      seriesColors: [ "#9DFF00", "#00E9FF", "#0069FF", "#9600FF", "#FF001E",
+        "#00FF62", "#FFAE00", "#d8b83f", "#FFF700", "#0085cc"],
+      grid: {
+        drawGridLines: false,        // wether to draw lines across the grid or not.
+        gridLineColor: '#cccccc',   // *Color of the grid lines.
+        background: '#ffffff',      // CSS color spec for background color of grid.
+        borderColor: '#999999',     // CSS color spec for border around grid.
+        shadow: false,
+        borderWidth: 0,
+    },
+      seriesDefaults: {
+          rendererOptions: {
+              shadow:false,
+          }
+      },
+    }
+  );
+    
+});
+
+</script>
+</script>
+
+
+{% endblock %}

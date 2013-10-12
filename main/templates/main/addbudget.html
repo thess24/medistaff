@@ -1,0 +1,54 @@
+{% extends "base.html" %}
+
+{% block title %}Budget{% endblock%}
+
+{% block content %}
+
+          <div class="page-header position-relative">
+            <h1>
+              Budget
+              <small>
+                <i class="icon-double-angle-right"></i>
+                Add a bugdet and view past entries
+              </small>
+            </h1>
+          </div><!-- /.page-header -->
+
+
+<div class="row-fluid">
+  <div class='span12'>
+
+          <form method='post' class='form-inline'>{% csrf_token %}
+          {{form}}
+          <input type='submit' class='btn'>
+          </form>
+
+
+        <table class='table table-bordered table-hover'>
+          <thead>
+            <tr>
+              <th>Unit</th>
+              <th>Budget</th>
+              <th>Date</th>
+            </tr>
+          </thead>
+          <tbody>
+            {%for b in budgets%}
+            <tr>
+              <td>{{b.unit}}</td>
+              <td>$ {{b.budget}}</td>
+              <td>{{b.date}}</td>
+            </tr>
+              {% endfor %}
+          </tbody>
+        </table>
+  </div>
+</div>
+
+{% endblock %} 
+
+{% block extrascripts %}
+<script type="text/javascript">
+$('#id_date').datepicker();
+</script>
+{% endblock %}

@@ -1,0 +1,91 @@
+{% extends "decisionarea.html" %}
+
+{% block title %}Quarter Info{% endblock%}
+
+{% block content %}
+
+
+  <div class='span9'>
+
+    <div class='row'>
+      <div class='span11 offset1'>
+          <h2>Build New Factories and Warehouses</h2>
+      </div>
+    </div>
+    <hr>
+
+<form method="post" id='decisionform'> {% csrf_token %}
+
+    <div class='row'>
+      <div class='span11 offset1'>
+          <h4>Factories</h4>
+      </div>
+    </div>
+
+    <div class='row'>
+      <div class='span11 offset1'>
+        <table class="table table-hover">
+            <thead>
+              <tr>
+                <th></th>
+                <th>Location</th>
+                <th>Capacity</th>
+                <th>Cost per Unit</th>
+                <th>Factory Cost</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for m in manufacturers %}
+              <tr>
+                <td><input type='checkbox'></td>
+                <td>{{m.location}}</td>
+                <td>{{m.capacity}}</td>
+                <td>${{m.costperunit}}</td>
+                <td>{{m.sellbuycost}}</td>
+              </tr>
+              {% endfor %}
+            </tbody>
+        </table>
+      </div>
+    </div>
+<br>
+
+    <div class='row'>
+      <div class='span11 offset1'>
+          <h4>Warehouses</h4>
+      </div>
+    </div>
+
+    <div class='row'>
+      <div class='span11 offset1'>
+        <table class="table table-hover">
+            <thead>
+              <tr>
+                <th></th>
+                <th>Location</th>
+                <th>Capacity</th>
+                <th>Storage per Unit</th>
+                <th>Warehouse Cost</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for m in warehouses %}
+              <tr>
+                <td><input type='checkbox'></td>
+                <td>{{m.location}}</td>
+                <td>{{m.capacity}}</td>
+                <td>${{m.costperunit}}</td>
+                <td>{{m.sellbuycost}}</td>
+              </tr>
+              {% endfor %}
+            </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+          <div class='span11 offset1'><input type="submit" value= "Update" name="add" class="btn"/></div>
+  </form>
+
+{% endblock %}

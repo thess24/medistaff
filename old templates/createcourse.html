@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+
+
+{% block head %}
+	<style type="text/css">
+	</style> 
+
+	<script>
+	</script>
+
+{% endblock %}
+
+{% block content %}
+
+<div style='margin-top:100px'>
+
+<form method="post"> {% csrf_token %}
+
+	{{CourseForm.as_p}}
+	<input type="submit" value= "Submit" name="addcourse" class="btn"/>
+
+</form>
+
+</div>
+
+{% endblock %}

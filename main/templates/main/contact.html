@@ -1,0 +1,33 @@
+{% extends "basemodelindex.html" %}
+
+
+{% block title %}
+{% endblock %}
+
+{% block head %}
+
+<style type="text/css">
+    body {
+        padding-top: 80px;
+      }
+</style>
+
+{% endblock %}
+
+{% block content %}
+
+
+ <div class='container'>
+	<div class='row'>
+		<h2>Contact</h2>
+		<h4>Fill in the information and we be in contact very shortly with an estimate!</h4>
+
+				<form method='post'>{% csrf_token %}
+                {{form}}
+                <br>
+                <input type='submit' name='contact'>
+                </form>
+	</div>
+</div>
+
+{% endblock %}
