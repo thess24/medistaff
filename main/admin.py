@@ -1,5 +1,5 @@
 from django.contrib import admin
-from main.models import Workday, Hospital, Unit, System, CensusInfo, BudgetInfo, UserProfile
+from main.models import Workday, Hospital, Unit, System, CensusInfo, BudgetInfo, UserProfile, HoursAvailable, UnitManager, SystemManager
 from django.contrib.auth.admin import UserAdmin
 from django.contrib.auth.forms import UserChangeForm, UserCreationForm
 
@@ -47,7 +47,9 @@ admin.site.register(Unit, UnitAdmin)
 admin.site.register(System)
 admin.site.register(CensusInfo)
 admin.site.register(BudgetInfo)
-# admin.site.register(UserProfile)
+admin.site.register(HoursAvailable)
+admin.site.register(UnitManager)
+admin.site.register(SystemManager)
 admin.site.register(UserProfile, MyUserAdmin)
 
 

@@ -18,7 +18,7 @@
 <div class="row-fluid">
   <div class='span12'>
 
-          <form method='post' class='form-inline'>{% csrf_token %}
+          <form method='post'>{% csrf_token %}
           {{form}}
           <input type='submit' class='btn btn-small'name='add'>
           </form>
@@ -44,7 +44,7 @@
                   <form method='post'>{% csrf_token %}
                   <tr>
                     <td>{{wd.unit}}</td>
-                    <td>{{wd.hospital}}</td>
+                    <td>{{wd.unit.hospital}}</td>
                     <td>{{wd.position}}</td>
                     <td>{{wd.start|date:"SHORT_DATE_FORMAT" }}</td>
                     <td>{{wd.start|time:"h:i a"}}</td>

@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<!--[if IE 7]> <html lang="en" class="ie7"> <![endif]-->  
+<!--[if IE 8]> <html lang="en" class="ie8"> <![endif]-->  
+<!--[if IE 9]> <html lang="en" class="ie9"> <![endif]-->  
+<!--[if !IE]><!--> <html lang="en"> <!--<![endif]-->  
+<head>
+    <title>{% block title %} Unify | Welcome...{% endblock %}</title>
+    {% block head%}
+    {% endblock %}{% load staticfiles %}
+    <!-- Meta -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <!-- CSS Global Compulsory-->
+    <link rel="stylesheet" href="{% static 'main/assets/unify/plugins/bootstrap/css/bootstrap.min.css' %}" >
+    <link rel="stylesheet" href="{% static 'main/assets/unify/css/style.css' %}" >
+    <link rel="stylesheet" href="{% static 'main/assets/unify/css/headers/header1.css' %}" >
+    <link rel="stylesheet" href="{% static 'main/assets/unify/plugins/bootstrap/css/bootstrap-responsive.min.css' %}" >
+    <link rel="stylesheet" href="{% static 'main/assets/unify/css/style_responsive.css' %}" >
+    <link rel="shortcut icon" href="favicon.ico">        
+    <!-- CSS Implementing Plugins -->    
+    <link rel="stylesheet" href="{% static 'main/assets/unify/plugins/font-awesome/css/font-awesome.css' %}" >
+    <link rel="stylesheet" href="{% static 'main/assets/unify/plugins/flexslider/flexslider.css' %}" type="text/css" media="screen">          
+    <link rel="stylesheet" href="{% static 'main/assets/unify/plugins/parallax-slider/css/parallax-slider.css' %}" type="text/css"> 
+
+
+</head> 
+    
+    
+
+
+<body>
+
+<!--=== Top ===-->    
+<div class="top">
+    <div class="container">			
+        <ul class="loginbar pull-right">
+            <li><i class="icon-globe"></i><a>Languages <i class="icon-sort-up"></i></a>
+            	<ul class="nav-list">
+                	<li class="active"><a href="#">English</a> <i class="icon-ok"></i></li>
+                	<li><a href="#">Spanish</a></li>
+                	<li><a href="#">Russian</a></li>
+                	<li><a href="#">German</a></li>
+                </ul>
+            </li>	
+            <li class="devider">&nbsp;</li>
+            {% if user.is_authentifated %}
+            <li><a href="/accounts/login" class="login-btn">Login</a></li>
+            {% else %}
+            <li><b><a href="/{{user.homesystem|slugify}}" class="login-btn">{{user.homesystem}}</a></b></li>
+            {% endif %}
+        </ul>
+    </div>		
+</div><!--/top-->
+<!--=== End Top ===-->    
+
+<!--=== Header ===-->
+<div class="header">               
+    <div class="container"> 
+        <!-- Logo -->       
+        <div class="logo">                                             
+            <a href="/"><img id="logo-header" src="{% static 'main/assets/unify/img/logo1-default.png' %}" alt="Logo"></a>
+        </div><!-- /logo -->        
+                                    
+        <!-- Menu -->       
+        <div class="navbar">                                
+            <div class="navbar-inner">                                  
+                <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </a><!-- /nav-collapse -->                                  
+                <div class="nav-collapse collapse">                                     
+                    <ul class="nav top-2">
+                        <li>
+                            <a href="/">Home</a>                      
+                        </li>
+                       <li>
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Benefits
+                                <b class="caret"></b>                            
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li><a href="/benefits">Overview</a></li>
+                                <li><a href="/benefits_executives">For Executives</a></li>
+                                <li><a href="/benefits_managers">For Managers</a></li>
+                                <li><a href="/benefits_nurses">For Nurses</a></li>
+                            </ul>
+                            <b class="caret-out"></b>                        
+                        </li>
+                        <li>
+                            <a href="" class="dropdown-toggle" data-toggle="dropdown">Features
+                                <b class="caret"></b>                            
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li><a href="/features">Overview</a></li>
+                                <li><a href="feature_grid.html">Flex Scheduling</a></li>
+                                <li><a href="feature_typography.html">Census Forcasting</a></li>
+                                <li><a href="feature_thumbnail.html">Calender Integration</a></li>
+                                <li><a href="feature_component.html">Superior Communication</a></li>
+                                <li><a href="feature_component.html">Cost Management</a></li>
+                                <li><a href="feature_component.html">Compliance</a></li>
+                            </ul>
+                            <b class="caret-out"></b>                        
+                        </li>
+                        <li>
+                            <a href="/blog" >Blog</a>                      
+                        </li>
+                        <li>
+                            <a href="/contact">Contact</a>                     
+                        </li>
+                        <li class='green'>
+                            <a href="/contact">Purchase!</a>                     
+                        </li>
+                        <li><a class="search"><i class="icon-search search-btn"></i></a></li>                               
+                    </ul>
+                    <div class="search-open">
+                        <div class="input-append">
+                            <form>
+                                <input type="text" class="span3" placeholder="Search" />
+                                <button type="submit" class="btn-u">Go</button>
+                            </form>
+                        </div>
+                    </div>
+                </div><!-- /nav-collapse -->                                
+            </div><!-- /navbar-inner -->
+        </div><!-- /navbar -->                          
+    </div><!-- /container -->               
+</div><!--/header -->      
+<!--=== End Header ===-->
+
+{% block breadcrumbs %}
+{% endblock %}
+
+{% block content %}
+{% endblock %}
+
+<!--=== Footer ===-->
+<div class="footer">
+	<div class="container">
+		<div class="row-fluid">
+			<div class="span4">
+                <!-- About -->
+		        <div class="headline"><h3>About</h3></div>	
+				<p class="margin-bottom-25">Unify is an incredibly beautiful responsive Bootstrap Template for corporate and creative professionals.</p>						
+			</div><!--/span4-->	
+			
+			<div class="span4">
+                <div class="posts">
+                    <div class="headline"><h3>Recent Blog Entries</h3></div>
+                    <dl class="dl-horizontal">
+                        <dt><a href="#"><img src="{% static 'main/assets/unify/img/sliders/elastislide/6.jpg' %}" alt="" /></a></dt>
+                        <dd>
+                            <p><a href="#">Anim moon officia Unify is an incredibly beautiful responsive Bootstrap Template</a></p> 
+                        </dd>
+                    </dl>
+                    <dl class="dl-horizontal">
+                    <dt><a href="#"><img src="{% static 'main/assets/unify/img/sliders/elastislide/10.jpg' %}" alt="" /></a></dt>
+                        <dd>
+                            <p><a href="#">Anim moon officia Unify is an incredibly beautiful responsive Bootstrap Template</a></p> 
+                        </dd>
+                    </dl>
+                    <dl class="dl-horizontal">
+                    <dt><a href="#"><img src="{% static 'main/assets/unify/img/sliders/elastislide/11.jpg' %}" alt="" /></a></dt>
+                        <dd>
+                            <p><a href="#">Anim moon officia Unify is an incredibly beautiful responsive Bootstrap Template</a></p> 
+                        </dd>
+                    </dl>
+                </div>
+			</div><!--/span4-->
+
+			<div class="span4">
+	            <!-- Monthly Newsletter -->
+		        <div class="headline"><h3>Contact Us</h3></div>	
+                <address>
+					25, Lorem Lis Street, Orange <br />
+					California, US <br />
+					Phone: 800 123 3456 <br />
+					Fax: 800 123 3456 <br />
+					Email: <a href="mailto:info@anybiz.com" class="">info@anybiz.com</a>
+                </address>
+
+                <!-- Stay Connected -->
+		        <div class="headline"><h3>Stay Connected</h3></div>	
+                <ul class="social-icons">
+                    <li><a href="#" data-original-title="Feed" class="social_rss"></a></li>
+                    <li><a href="#" data-original-title="Facebook" class="social_facebook"></a></li>
+                    <li><a href="#" data-original-title="Twitter" class="social_twitter"></a></li>
+                    <li><a href="#" data-original-title="Goole Plus" class="social_googleplus"></a></li>
+                    <li><a href="#" data-original-title="Pinterest" class="social_pintrest"></a></li>
+                    <li><a href="#" data-original-title="Linkedin" class="social_linkedin"></a></li>
+                    <li><a href="#" data-original-title="Vimeo" class="social_vimeo"></a></li>
+                </ul>
+			</div><!--/span4-->
+		</div><!--/row-fluid-->	
+	</div><!--/container-->	
+</div><!--/footer-->	
+<!--=== End Footer ===-->
+
+<!--=== Copyright ===-->
+<div class="copyright">
+	<div class="container">
+		<div class="row-fluid">
+			<div class="span8">						
+	            <p>2013 &copy; Unify. ALL Rights Reserved. <a href="/privacy">Privacy Policy</a> | <a href="/termsofservice">Terms of Service</a></p>
+			</div>
+			<div class="span4">	
+				<a href="index.html"><img id="logo-footer" src="{% static 'main/assets/unify/img/logo2-default.png' %}" class="pull-right" alt="" /></a>
+			</div>
+		</div><!--/row-fluid-->
+	</div><!--/container-->	
+</div><!--/copyright-->	
+<!--=== End Copyright ===-->
+
+<!-- JS Global Compulsory -->           
+<script type="text/javascript" src="{% static 'main/assets/unify/js/jquery-1.8.2.min.js' %}"></script>
+<script type="text/javascript" src="{% static 'main/assets/unify/js/modernizr.custom.js' %}"></script>        
+<script type="text/javascript" src="{% static 'main/assets/unify/plugins/bootstrap/js/bootstrap.min.js' %}"></script>
+
+<!-- JS Implementing Plugins -->           
+<script type="text/javascript" src="{% static 'main/assets/unify/plugins/flexslider/jquery.flexslider-min.js' %}"></script>
+{% block implementing %}{% endblock %}
+<!-- <script type="text/javascript" src="{% static 'main/assets/unify/plugins/back-to-top.js' %}"></script> -->
+
+<!-- JS Page Level -->           
+<script type="text/javascript" src="{% static 'main/assets/unify/js/app.js' %}"></script>
+
+{% block pagelevel %}{% endblock %}
+
+
+
+<script type="text/javascript">
+    jQuery(document).ready(function() {
+        App.init();
+        App.initSliders();
+        // Contact.initMap();
+    });
+</script>
+{% block extrascripts%}
+{% endblock %}
+<!--[if lt IE 9]>
+    <script src="{% static 'main/assets/unify/js/respond.js' %}"></script>
+<![endif]-->
+
+</body>
+</html> 
+
+
+

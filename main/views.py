@@ -6,7 +6,10 @@ from django.utils import timezone  #for dates on submit
 from django.contrib.auth.decorators import login_required, user_passes_test
 from django.core.urlresolvers import reverse
 from django.contrib.auth.models import User,Group
-from main.models import ContactForm, Workday, System, Hospital, Unit, WorkdayForm, HospitalForm, UnitForm, BudgetForm, CensusForm, UnitCensusForm, BudgetInfo, CensusInfo, UserProfile, UserProfileForm, OpenShiftForm, DateFilterForm, AddOpenShiftForm
+from main.models import ContactForm, Workday, System, Hospital, Unit, WorkdayForm, HospitalForm, UnitForm, BudgetForm
+from main.models import CensusForm, UnitCensusForm, BudgetInfo, CensusInfo, UserProfile, UserProfileForm 
+from main.models import OpenShiftForm, DateFilterForm, AddOpenShiftForm, HoursAvailableForm, HoursAvailable 
+from main.models import UnitManager, SystemManager, UnitManagerForm
 from django.db.models import Avg, Count, Sum, Max
 import datetime
 from django.template.defaultfilters import slugify
@@ -45,66 +48,106 @@ def startercontext(request):
 	return system, context
 
 
-# VIEWS 
+
+######################################
+########    FRONT END VIEWS   ########
+
 def index(request):
-	if request.user:
-		userinfo = UserProfile.objects.get(id=request.user.id)
-		context = { 'userinfo':userinfo }
-	else: context = {}
-	return render(request, 'main/index.html', context)
+	return render(request, 'main/index.html')
 
 def about(request):
-	if request.user:
-		userinfo = UserProfile.objects.get(id=request.user.id)
-		context = { 'userinfo':userinfo }
-	else: context = {}
-	return render(request, 'main/about.html', context)
+	return render(request, 'main/about.html')
 
 def benefits(request):
-	if request.user:
-		userinfo = UserProfile.objects.get(id=request.user.id)
-		context = { 'userinfo':userinfo }
-	else: context = {}
-	return render(request, 'main/benefits.html', context)
+	return render(request, 'main/benefits.html')
+
+def benefits_executives(request):
+	return render(request, 'main/benefits_executives.html')
+
+def benefits_managers(request):
+	return render(request, 'main/benefits_managers.html')
+
+def benefits_nurses(request):
+	return render(request, 'main/benefits_nurses.html')
+
+def blog(request):
+	return render(request, 'main/blog.html')
 
 def contact(request):
 	form = ContactForm()
-	if request.user:
-		userinfo = UserProfile.objects.get(id=request.user.id)
-		context = { 'userinfo':userinfo, 'form':form }
-	else: context = {'form':form }
-
+	context = {'form':form}
 	return render(request, 'main/contact.html', context)
 
+def termsofservice(request):
+	return render(request, 'main/termsofservice.html')
+
+def features(request):
+	return render(request, 'main/features.html')
+
+def privacy(request):
+	return render(request, 'main/privacy.html')
+
+
+
+
+######################################
+########    BACK END VIEWS   ########
+
+
 def home(request, systempass):
-	
-	workday = Workday.objects.filter(system__slug__iexact=systempass, name=request.user)  #might not be unique if by name...should do by id
 
-	context = {'workday':workday}
+	try: unitmanaged = UnitManager.objects.get(name__id=request.user.id)
+	except: unitmanaged = False
 
-	return render(request, 'main/home.html', context)
+	if unitmanaged: 
+		workday = Workday.objects.filter(unit=unitmanaged.unit)
+		openshift = Workday.objects.filter(openmarket=True, unit=unitmanaged.unit)
+		workdaynow = workday.filter(start__lte=datetime.datetime.now(),end__gte=datetime.datetime.now())
+		workingnow = workdaynow.count()
+
+		try: 
+			censusinfo = CensusInfo.objects.filter(unit=unitmanaged).order_by('time')
+			lastcensus = censusinfo.latest('time')
+		except CensusInfo.DoesNotExist: 
+			censusinfo = None
+			lastcensus = None
+
+		context = {'workday':workday, 'openshift': openshift, 'censusinfo': censusinfo, 'lastcensus': lastcensus, 'workingnow': workingnow, 'unitmanaged': unitmanaged}
+		return render(request, 'main/home-manager.html', context)	
+
+	else:
+		workday = Workday.objects.filter(system__slug__iexact=systempass, name__id=request.user.id)
+		hoursavailable = HoursAvailable.objects.filter(worker__id = request.user.id, start__gte=datetime.datetime.now()- datetime.timedelta(days=60))
+		groups = request.user.groups.values_list('name',flat=True)
+		openshift = Workday.objects.filter(openmarket=True, unit__fullslug__in=groups)
+
+
+
+		context = {'workday':workday, 'hoursavailable': hoursavailable, 'openshift': openshift}  # for nurse
+		return render(request, 'main/home-nurse.html', context)  # for nurse 
+
 
 def profile(request, systempass, username):
-	# system, context = startercontext(request)
 	units = Unit.objects.filter(system__slug__iexact=systempass)
 	groups = request.user.groups.values_list('name',flat=True)
 	userdata = get_object_or_404(UserProfile, username= username)
+	try: unitmanaged = UnitManager.objects.get(name__id=request.user.id)
+	except: unitmanaged = False
 
-	if request.method =='POST':
-		if 'userforminfo' in request.POST:
-			changeform = UserProfileForm(request.POST, instance=userdata)
-			if changeform.is_valid():
-				instance = changeform.save(commit=False)
-				instance.save()
+	# if request.method =='POST':
+	# 	if 'userforminfo' in request.POST:
+	# 		changeform = UserProfileForm(request.POST, instance=userdata)
+	# 		if changeform.is_valid():
+	# 			instance = changeform.save(commit=False)
+	# 			instance.save()
 
-				# adds you to homeunit group on form update
-				groupname = instance.homeunit.fullslug
-				g = Group.objects.get(name=groupname)
-				g.userprofile_set.add(request.user)
-	else:
-		changeform = UserProfileForm(instance= userdata) 
-	context = {'units':units, 'groups':groups, 'userdata': userdata, 'changeform': changeform}
-	# context.update(contextadd)
+	# 			# adds you to homeunit group on form update
+	# 			groupname = instance.homeunit.fullslug
+	# 			g = Group.objects.get(name=groupname)
+	# 			g.userprofile_set.add(request.user)
+	# else:
+	# 	changeform = UserProfileForm(instance= userdata) 
+	context = {'units':units, 'groups':groups, 'userdata': userdata, 'unitmanaged': unitmanaged}
 	return render(request, 'main/profile.html', context)
 
 
@@ -144,8 +187,8 @@ def systemsettings(request, systempass):
 	return render(request, 'main/systemsettings.html', context)
 
 def openshift(request, systempass):
-	# system, context = startercontext(request)
-	workday = Workday.objects.filter(system__slug__iexact=systempass, openmarket=True)
+	workday = Workday.objects.filter(system__slug__iexact=systempass, openmarket=True, start__gte=datetime.datetime.now())
+
 
 	if request.method =='POST':
 		if 'grab' in request.POST:
@@ -169,7 +212,6 @@ def openshift(request, systempass):
 	else:
 		form = OpenShiftForm()
 	context = {'workday':workday, 'form':form}
-	# context.update(contextadd)
 	return render(request, 'main/openshift.html', context)
 
 def systemoverview(request, systempass):
@@ -178,17 +220,17 @@ def systemoverview(request, systempass):
 
 @user_passes_test(profilecomplete, login_url='badprofile')
 def hospital(request, systempass, hospitalpass):
-	# system, context = startercontext(request)
+
+	openshifts = Workday.objects.filter(unit__hospital__slug__iexact=hospitalpass, openmarket=True, start__gte=datetime.datetime.now())
 	hospital = Hospital.objects.get(slug__iexact=hospitalpass, system__slug__iexact=systempass)
 	units = Unit.objects.filter(hospital__slug__iexact=hospitalpass, system__slug__iexact=systempass)
-	workers = Workday.objects.filter(hospital__slug__iexact=hospitalpass, system__slug__iexact=systempass,start__lte=datetime.datetime.now(),end__gte=datetime.datetime.now()).count()
+	workers = Workday.objects.filter(unit__hospital__slug__iexact=hospitalpass,start__lte=datetime.datetime.now(),end__gte=datetime.datetime.now()).count()
 
-	context = {'hospital':hospital,'units':units, 'workers': workers}
-	# context.update(contextadd)
+	context = {'hospital':hospital,'units':units, 'workers': workers, 'openshifts': openshifts}
 	return render(request, 'main/hospital.html', context)
 
 def unit(request, systempass, hospitalpass, unitpass):
-	# system, context = startercontext(request)
+
 	hospital = Hospital.objects.get(slug__iexact=hospitalpass, system__slug__iexact=systempass)
 	unit = Unit.objects.get(slug__iexact=unitpass,hospital__slug__iexact=hospitalpass, system__slug__iexact=systempass)
 
@@ -210,12 +252,34 @@ def unit(request, systempass, hospitalpass, unitpass):
 		lastcensus = None
 
 	context = {'hospital':hospital, 'unit':unit, 'workers':workers, 'censusinfo':censusinfo, 'lastcensus':lastcensus, 'hourstoday':hourstoday, 'workdaynow':workdaynow, 'workdaylater':workdaylater}
-	# context.update(contextadd)
+
 	return render(request, 'main/unit.html', context)
 
 def inputdates(request, systempass):
 
-	context = {}
+	workday = Workday.objects.filter(name__id = request.user.id, start__gte=datetime.datetime.now()- datetime.timedelta(days=60))
+	hoursavailable = HoursAvailable.objects.filter(worker__id = request.user.id, start__gte=datetime.datetime.now()- datetime.timedelta(days=60))
+
+	if request.method =='POST':
+		if 'hoursinput' in request.POST:
+			inputform=HoursAvailableForm(request.POST)
+			if inputform.is_valid():
+				instance = inputform.save(commit=False)
+				instance.worker = request.user
+				instance.save()
+		if 'delete' in request.POST:
+			inputform = HoursAvailableForm()
+			h = HoursAvailable.objects.get(id=request.POST['id'])
+			h.delete()
+	else: inputform = HoursAvailableForm()
+
+	context = {'workday':workday, 'inputform': inputform, 'hoursavailable': hoursavailable}
+	return render(request, 'main/inputdates.html', context)
+	
+def calendar(request, systempass):
+
+	workday = Workday.objects.filter(name__id = request.user.id, start__gte=datetime.datetime.now()- datetime.timedelta(days=60))
+	context = {'workday':workday}
 	return render(request, 'main/inputdates.html', context)
 	
 
@@ -238,8 +302,8 @@ def openshiftindex(request, systempass):
 	return render(request, 'main/addopenshiftindex.html', context)
 
 def addopenshift(request, systempass, hospitalpass, unitpass):
-	system = System.objects.get(slug__iexact=systempass)
-	hospital = Hospital.objects.get(slug__iexact=hospitalpass, system__slug__iexact=systempass)
+	system = System.objects.get(slug__iexact=systempass)  # wont be needed
+	hospital = Hospital.objects.get(slug__iexact=hospitalpass, system__slug__iexact=systempass) # wont be needed
 	unit = Unit.objects.get(slug__iexact=unitpass,hospital__slug__iexact=hospitalpass, system__slug__iexact=systempass)
 	workday = Workday.objects.filter(system__slug__iexact=systempass,unit__slug__iexact=unitpass,hospital__slug__iexact=hospitalpass, openmarket=True, start__gte=datetime.datetime.now())
 	if request.method =='POST':
@@ -250,28 +314,30 @@ def addopenshift(request, systempass, hospitalpass, unitpass):
 				instance.unit = unit
 				instance.name = None
 				instance.manager = request.user
-				instance.hospital = hospital
+				instance.hospital = hospital  # wont be needed
 				instance.start = form.cleaned_data['start']
 				instance.end = form.cleaned_data['end']
 				timediff = instance.end - instance.start
 				instance.hours = timediff.seconds/float(3600)
-				instance.system = system
+				instance.system = system  # wont be needed
 				instance.openmarket = True
 				instance.save()
+				return HttpResponseRedirect(reverse('main.views.addopenshift', args=(systempass,hospitalpass,unitpass)))	
+
 		if 'delete' in request.POST:
 			form=AddOpenShiftForm()	
 			w = Workday.objects.get(id=request.POST['id'])
 			w.delete()
+			return HttpResponseRedirect(reverse('main.views.addopenshift', args=(systempass,hospitalpass,unitpass)))	
 
 	else:
 		form=AddOpenShiftForm()	
-	context = {'hospital':hospital, 'unit':unit, 'workday': workday, 'form':form}
-	# context.update(contextadd)
+	context = {'unit':unit, 'workday': workday, 'form':form}  # will need to be redone
 	return render(request, 'main/addopenshift.html', context)
 
 
 def schedule(request, systempass, hospitalpass, unitpass):
-	# system, context = startercontext(request)
+	system = System.objects.get(slug__iexact=systempass)
 	hospital = Hospital.objects.get(slug__iexact=hospitalpass, system__slug__iexact=systempass)
 	unit = Unit.objects.get(slug__iexact=unitpass,hospital__slug__iexact=hospitalpass, system__slug__iexact=systempass)
 	userinfo = UserProfile.objects.filter(groups__name=unit.fullslug).annotate(sumhours = Sum('workday__hours'))
@@ -365,7 +431,7 @@ def addhospital(request,systempass):
 
 def addunit(request,systempass, hospitalpass):
 	whattoadd = 'Unit'
-	# system, context = startercontext(request)
+	system = System.objects.get(slug__iexact=systempass)
 	hospital = Hospital.objects.get(slug__iexact=hospitalpass, system__slug__iexact=systempass)
 	units = Unit.objects.filter(system__slug__iexact=systempass, hospital__slug__iexact=hospitalpass)
 	if request.method =='POST':
@@ -382,8 +448,7 @@ def addunit(request,systempass, hospitalpass):
 
 	else:
 		form = UnitForm()
-	contextadd = {"form":form, 'whattoadd': whattoadd, 'hospital':hospital, 'units':units}
-	# context.update(contextadd)
+	context = {"form":form, 'whattoadd': whattoadd, 'hospital':hospital, 'units':units}
 	return render(request, 'main/addhospital.html', context)
 
 
@@ -465,8 +530,30 @@ def badprofile(request):
 	return render(request, 'main/baduserprofile.html', context)
 
 
+def managers(request, systempass):
+	managers = UnitManager.objects.filter(system__slug__iexact=systempass)
+	context = {'managers':managers}
+
+	return render(request, 'main/managers.html', context)
 
 
+def editmanagers(request, systempass):
+	system = System.objects.get(slug__iexact=systempass)
+
+	if request.method =='POST':
+		form = UnitManagerForm(request.POST)
+		if form.is_valid():
+
+			instance = form.save(commit=False)
+			UnitManager.objects.filter(unit=instance.unit).delete()
+			instance.system = system
+			instance.save()
+			
+	else:
+		form = UnitManagerForm()
+
+	context = {'form':form}
+	return render(request, 'main/editmanagers.html', context)
 
 
 

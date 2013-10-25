@@ -1,4 +1,4 @@
-{% extends "basemodelindex.html" %}
+{% extends "frontendbase.html" %}
 
 
 {% block title %}
@@ -7,114 +7,185 @@
 {% block head %}
 {% endblock %}
   
-{% block content %}
-    <!-- Carousel
-    ================================================== -->
-    <div id="myCarousel" class="carousel slide">
-      <div class="carousel-inner">
-        <div class="item active">
-          <img src="http://getbootstrap.com/2.3.2/assets/img/examples/slide-01.jpg" alt="">
-          <div class="container">
-            <div class="carousel-caption">
-              <h1>Cut OT and Agency Costs in Half</h1>
-              <p class="lead">Labor is the single largest expense for Hospitals</p>
-              <a class="btn btn-large btn-primary" href="#">Sign up today</a>
-            </div>
-          </div>
+{% block content %}{% load staticfiles %}
+
+<!--=== Slider ===-->
+<div class="slider-inner">
+    <div id="da-slider" class="da-slider">
+        <div class="da-slide">
+            <h2><i>SPEND LESS</i><br/><i>ON LABOR</i></h2>
+            <p><i>Labor costs are</i> <br /> <i>the single largest cost</i> <br /> <i>in a healthcare system</i></p>
+            <div class="da-img"><img src="{% static 'main/assets/unify/plugins/parallax-slider/img/1.png' %}" alt="" /></div>
         </div>
-        <div class="item">
-          <img src="http://getbootstrap.com/2.3.2/assets/img/examples/slide-02.jpg" alt="">
-          <div class="container">
-            <div class="carousel-caption">
-              <h1>Improve Nurse Satisfaction</h1>
-              <p class="lead">Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
-              <a class="btn btn-large btn-primary" href="#">Learn more</a>
-            </div>
-          </div>
+        <div class="da-slide">
+            <h2><i>EFFICIENTLY</i> <br /> <i>SCHEDULE</i> <br /></h2>
+            <p><i>Speed up the scheduling</i> <br /> <i>process and fill open slots</i><br /> <i>more quickly</i> </p>
+            <div class="da-img span6">
+              <div class="span6">
         </div>
-        <div class="item">
-          <img src="http://getbootstrap.com/2.3.2/assets/img/examples/slide-03.jpg" alt="">
-          <div class="container">
-            <div class="carousel-caption">
-              <h1>Create Easy to Manage Nurse Flex Pools</h1>
-              <p class="lead">Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
-              <a class="btn btn-large btn-primary" href="#">Browse gallery</a>
             </div>
-          </div>
         </div>
+        <div class="da-slide">
+            <h2><i>SUPERIOR</i> <br /> <i>COMMUNICATION</i></h2>
+            <p><i>Get the right staff</i> <br /> <i>at the right time</i> <br /></p>
+            <div class="da-img"><img src="{% static 'main/assets/unify/plugins/parallax-slider/img/html5andcss3.png' %}" alt="image01" /></div>
+        </div>
+        <nav class="da-arrows">
+            <span class="da-arrows-prev"></span>
+            <span class="da-arrows-next"></span>    
+        </nav>
+    </div><!--/da-slider-->
+</div><!--/slider-->
+<!--=== End Slider ===-->
+
+<!--=== Purchase Block ===-->
+<div class="row-fluid purchase margin-bottom-30"> 
+    <div class="container">
+    <div class="span9">
+            <span>MediStaff is a complete scheduling system with a cost managemnet focus.</span>
+            <p> We provide a software-as-a-service (SaaS) solution to reduce labor costs.  Our tools include OpenShift&trade;, a package to fill open shifts across the system, an intuitive, flexible, calendar scheduling system,  and census forecasting.  To learn more about the features Medistaff can provide, <a href="/features" class='color-green'>click here</a></p>
+        </div>
+        <a href="/contact" class="btn-buy hover-effect">Contact us now!</a>
+    </div>
+</div><!--/row-fluid-->
+<!-- End Purchase Block -->
+
+<!--=== Content Part ===-->
+<div class="container"> 
+  <!-- Service Blocks -->
+  <div class="row-fluid">
+      <div class="span4">
+        <div class="service clearfix">
+                <i class="icon-resize-small"></i>
+          <div class="desc">
+            <h4>OpenShift&trade;</h4>
+                    <p>Opensfhit&trade; is a flex labor scheduling package to reduce OT and Agency costs.  Easily fill open shfits across hospitals!  Shifts can be posted for individuals, as well as put out in the open for qualified workers to grab.  No more excessive OT and agency labor costs.</p>
+          </div>
+        </div>  
       </div>
-      <a class="left carousel-control" href="#myCarousel" data-slide="prev">&lsaquo;</a>
-      <a class="right carousel-control" href="#myCarousel" data-slide="next">&rsaquo;</a>
-    </div><!-- /.carousel -->
-
-
-
-    <!-- Marketing messaging and featurettes
-    ================================================== -->
-    <!-- Wrap the rest of the page in another container to center all the content. -->
-
-    <div class="container marketing">
-
-      <!-- Three columns of text below the carousel -->
-      <div class="row">
-        <div class="span4">
-          <img class="img-circle" data-src="holder.js/140x140">
-          <h2>Embrace Technology</h2>
-          <p>Donec sed odio dui. Etiam porta sem malesuada magna mollis euismod. Nullam id dolor id nibh ultricies vehicula ut id elit. Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Praesent commodo cursus magna, vel scelerisque nisl consectetur et.</p>
-          <p><a class="btn" href="#">View details &raquo;</a></p>
-        </div><!-- /.span4 -->
-        <div class="span4">
-          <img class="img-circle" data-src="holder.js/140x140">
-          <h2>Reduce Labor Costs</h2>
-          <p>Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit. Cras mattis consectetur purus sit amet fermentum. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.</p>
-          <p><a class="btn" href="#">View details &raquo;</a></p>
-        </div><!-- /.span4 -->
-        <div class="span4">
-          <img class="img-circle" data-src="holder.js/140x140">
-          <h2>Improve Associate Satsifcation</h2>
-          <p>Donec sed odio dui. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Vestibulum id ligula porta felis euismod semper. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.</p>
-          <p><a class="btn" href="#">View details &raquo;</a></p>
-        </div><!-- /.span4 -->
-      </div><!-- /.row -->
-
-
-      <!-- START THE FEATURETTES -->
-
-      <hr class="featurette-divider">
-
-      <div class="featurette">
-        <img class="featurette-image pull-right" src="http://getbootstrap.com/2.3.2/assets/img/examples/browser-icon-chrome.png">
-        <h2 class="featurette-heading">First featurette headling. <span class="muted">It'll blow your mind.</span></h2>
-        <p class="lead">Donec ullamcorper nulla non metus auctor fringilla. Vestibulum id ligula porta felis euismod semper. Praesent commodo cursus magna, vel scelerisque nisl consectetur. Fusce dapibus, tellus ac cursus commodo.</p>
+      <div class="span4">
+        <div class="service clearfix">
+                <i class="icon-calendar"></i>
+          <div class="desc">
+            <h4>SmartSchedule&trade;</h4>
+                    <p>Easily manage nurse labor with an intuitive scheduling system built on modern techonologies.  Text employees about shifts!  Schedule based on CensusPredict&trade;!  Find the right nurse for the job!</p>
+          </div>
+        </div>  
       </div>
+      <div class="span4">
+        <div class="service clearfix">
+                <i class="icon-plane"></i>
+          <div class="desc">
+            <h4>Cost Management</h4>
+                    <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus etiam sem...</p>
+          </div>
+        </div>  
+      </div>          
+  </div><!--/row-fluid-->
+  <!-- //End Service Blokcs -->
 
-      <hr class="featurette-divider">
+  <!-- Recent Works -->
+  <div class="headline"><h3>Recent Works</h3></div>
+    <ul class="thumbnails">
+        <li class="span3">
+            <div class="thumbnail-style thumbnail-kenburn">
+              <div class="thumbnail-img">
+                    <div class="overflow-hidden"><img src="{% static 'main/assets/unify/img/carousel/2.jpg' %}" alt="" /></div>
+                    <a class="btn-more hover-effect" href="#">read more +</a>         
+                </div>
+                <h3><a class="hover-effect" href="#">Our Work</a></h3>
+                <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, justo sit amet risus etiam porta sem.</p>
+            </div>
+        </li>
+        <li class="span3">
+            <div class="thumbnail-style thumbnail-kenburn">
+              <div class="thumbnail-img">
+                    <div class="overflow-hidden"><img src="{% static 'main/assets/unify/img/carousel/3.jpg' %}" alt="" /></div>
+                    <a class="btn-more hover-effect" href="#">read more +</a>         
+                </div>
+                <h3><a class="hover-effect" href="#">One More Work</a></h3>
+                <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, justo sit amet risus etiam porta sem.</p>
+            </div>
+        </li>
+        <li class="span3">
+            <div class="thumbnail-style thumbnail-kenburn">
+              <div class="thumbnail-img">
+                    <div class="overflow-hidden"><img src="{% static 'main/assets/unify/img/carousel/9.jpg' %}" alt="" /></div>
+                    <a class="btn-more hover-effect" href="#">read more +</a>         
+                </div>
+                <h3><a class="hover-effect" href="#">Another Work</a></h3>
+                <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, justo sit amet risus etiam porta sem.</p>
+            </div>
+        </li>
+        <li class="span3">
+            <div class="thumbnail-style thumbnail-kenburn">
+              <div class="thumbnail-img">
+                    <div class="overflow-hidden"><img src="{% static 'main/assets/unify/img/carousel/10.jpg' %}" alt="" /></div>
+                    <a class="btn-more hover-effect" href="#">read more +</a>         
+                </div>
+                <h3><a class="hover-effect" href="#">Huge Work</a></h3>
+                <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, justo sit amet risus etiam porta sem.</p>
+            </div>
+        </li>
+    </ul><!--/thumbnails-->
+  <!-- //End Recent Works -->
+    
+  <!-- Information Blokcs -->
+  <div class="row-fluid margin-bottom-20">
+      <!-- Who We Are -->
+    <div class="span8">
+      <div class="headline"><h3>Welcome To UNIFY Template</h3></div>
+      <p><img class="pull-left lft-img-margin img-width-200" src="assets/img/carousel/6.jpg" alt="" />Unify is an incredibly beautiful responsive Bootstrap Template for corporate and creative professionals. It works on all major web browsers, tablets and phone.</p> 
+            <ul class="unstyled">
+              <li><i class="icon-ok color-green"></i> Donec id elit non mi porta gravida</li>
+              <li><i class="icon-ok color-green"></i> Corporate and Creative</li>
+              <li><i class="icon-ok color-green"></i> Responsive Bootstrap Template</li>
+              <li><i class="icon-ok color-green"></i> Corporate and Creative</li>
+            </ul><br>
 
-      <div class="featurette">
-        <img class="featurette-image pull-left" src="http://getbootstrap.com/2.3.2/assets/img/examples/browser-icon-firefox.png">
-        <h2 class="featurette-heading">Oh yeah, it's that good. <span class="muted">See for yourself.</span></h2>
-        <p class="lead">Donec ullamcorper nulla non metus auctor fringilla. Vestibulum id ligula porta felis euismod semper. Praesent commodo cursus magna, vel scelerisque nisl consectetur. Fusce dapibus, tellus ac cursus commodo.</p>
-      </div>
+            <blockquote class="hero-unify">
+                <p>Award winning digital agency. We bring a personal and effective approach to every project we work on, which is why. Unify is an incredibly beautiful responsive Bootstrap Template for corporate professionals.</p>
+                <small>CEO, Jack Bour</small>
+            </blockquote>
+        </div><!--/span8-->        
 
-      <hr class="featurette-divider">
+  </div><!--/row-fluid--> 
+  <!-- //End Information Blokcs -->
 
-      <div class="featurette">
-        <img class="featurette-image pull-right" src="http://getbootstrap.com/2.3.2/assets/img/examples/browser-icon-safari.png">
-        <h2 class="featurette-heading">And lastly, this one. <span class="muted">Checkmate.</span></h2>
-        <p class="lead">Donec ullamcorper nulla non metus auctor fringilla. Vestibulum id ligula porta felis euismod semper. Praesent commodo cursus magna, vel scelerisque nisl consectetur. Fusce dapibus, tellus ac cursus commodo.</p>
-      </div>
+  <!-- Our Clients -->
+  <div id="clients-flexslider" class="flexslider home clients">
+        <div class="headline"><h3>Our Clients</h3></div>  
+    <ul class="slides">
+      <li>
+                <a href="#">
+                    <img src="{% static 'assets/unify/img/clients/hp_grey.png' %}" alt="" /> 
+                    <img src="{% static 'assets/unify/assets/img/clients/hp.png' %}" class="color-img" alt="" />
+                </a>
+            </li>
 
-      <hr class="featurette-divider">
+    </ul>
+  </div><!--/flexslider-->
+  <!-- //End Our Clients -->
+</div><!--/container-->   
+<!-- End Content Part -->
 
-      <!-- /END THE FEATURETTES -->
+{% endblock %}
+
+{% block implementing %}{% load static %}
+<script type="text/javascript" src="{% static 'main/assets/unify/plugins/parallax-slider/js/modernizr.js' %}"></script>
+<script type="text/javascript" src="{% static 'main/assets/unify/plugins/parallax-slider/js/jquery.cslider.js' %}"></script>
+{% endblock %}
+
+{% block pagelevel %}
+<script type="text/javascript" src="{% static 'main/assets/unify/js/pages/index.js' %}"></script>
+{% endblock %}
 
 
-      <!-- FOOTER -->
-      <footer>
-        <p class="pull-right"><a href="#">Back to top</a></p>
-        <p>&copy; 2013 Company, Inc. &middot; <a href="#">Privacy</a> &middot; <a href="#">Terms</a></p>
-      </footer>
 
-    </div><!-- /.container -->
-
+{% block extrascripts %}
+<script type="text/javascript">
+    jQuery(document).ready(function() {
+        Index.initParallaxSlider();
+    });
+</script>
 {% endblock %}

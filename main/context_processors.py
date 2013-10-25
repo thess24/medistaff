@@ -6,9 +6,14 @@ from django.template.defaultfilters import slugify
 
 
 
-def systemstarterkit(request):
-    sysslug = slugify(request.user.homesystem)
-    system = System.objects.get(slug__iexact=sysslug)
-    allhospitals = Hospital.objects.filter(system=system)
-    allunits = Unit.objects.filter(system=system)
-    return {'allhospitals':allhospitals, 'allunits':allunits, 'system':system}
+def systemstarterkit(request): 
+	try:
+	    sysslug = slugify(request.user.homesystem)
+	    system = System.objects.get(slug__iexact=sysslug)
+	    allhospitals = Hospital.objects.filter(system=system)
+	    allunits = Unit.objects.filter(system=system)
+	    return {'allhospitals':allhospitals, 'allunits':allunits, 'system':system}
+	except:
+		return {}
+
+

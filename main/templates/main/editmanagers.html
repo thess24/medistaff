@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+
+{% block title %}System Overview{% endblock%}
+
+{% block content %}
+
+  <div class="page-header position-relative">
+    <h1>Add a New Manager
+      <span class='pull-right'><a href="/{{user.homesystem|slugify}}/managers">Managers List</a></span>
+    </h1>
+  </div><!-- /.page-header -->
+
+<div class="row">
+  <div class="span12">
+    <div class='alert alert-success' {% if not submitted %} hidden {% endif %}><button type="button" class="close" data-dismiss="alert">&times;</button>You submitted a new Manager!</div>
+    <div class='span12'>
+       <form method='post' >{% csrf_token %}
+        {{form.as_p}}
+        <input type='submit' class='btn btn-small'>
+       </form>
+    </div>
+  </div>
+</div>
+
+{% endblock %} 
+
+ 

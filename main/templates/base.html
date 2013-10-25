@@ -8,9 +8,9 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		
 		<!-- basics -->
-		<link rel="stylesheet" href="{% static 'main/assets/css/bootstrap.min.css' %}" />
-		<link rel="stylesheet" href="{% static 'main/assets/css/bootstrap-responsive.min.css' %}" />
-		<link rel="stylesheet" href="{% static 'main/assets/css/font-awesome.min.css' %}" />
+		<link rel="stylesheet" href="{% static 'main/assets/ace/css/bootstrap.min.css' %}" />
+		<link rel="stylesheet" href="{% static 'main/assets/ace/css/bootstrap-responsive.min.css' %}" />
+		<link rel="stylesheet" href="{% static 'main/assets/ace/css/font-awesome.min.css' %}" />
 		<style type="text/css">
 		.input-datetime{
 			width: 120px
@@ -20,17 +20,17 @@
 		{% block head %}
 		{% endblock %}
 		<!--[if IE 7]>
-		<link rel="stylesheet" href="{% static 'main/assets/css/font-awesome-ie7.min.css' %}" />
+		<link rel="stylesheet" href="{% static 'main/assets/ace/css/font-awesome-ie7.min.css' %}" />
 		<![endif]-->	
-		<link rel="stylesheet" href="{% static 'main/assets/css/ace-fonts.css' %}" />
-		<link rel="stylesheet" href="{% static 'main/assets/css/ace.min.css' %}" />
-		<link rel="stylesheet" href="{% static 'main/assets/css/ace-responsive.min.css' %}" />
-		<link rel="stylesheet" href="{% static 'main/assets/css/ace-skins.min.css' %}" />
+		<link rel="stylesheet" href="{% static 'main/assets/ace/css/ace-fonts.css' %}" />
+		<link rel="stylesheet" href="{% static 'main/assets/ace/css/ace.min.css' %}" />
+		<link rel="stylesheet" href="{% static 'main/assets/ace/css/ace-responsive.min.css' %}" />
+		<link rel="stylesheet" href="{% static 'main/assets/ace/css/ace-skins.min.css' %}" />
 
 		<!--[if lte IE 8]>
-		<link rel="stylesheet" href="{% static 'main/assets/css/ace-ie.min.css' %}" />
+		<link rel="stylesheet" href="{% static 'main/assets/ace/css/ace-ie.min.css' %}" />
 		<![endif]-->
-		<script src="{% static 'main/assets/js/ace-extra.min.js' %}"></script>
+		<script src="{% static 'main/assets/ace/js/ace-extra.min.js' %}"></script>
 
 	</head>
 
@@ -50,78 +50,6 @@
 					</a><!-- /.brand -->
 
 					<ul class="nav ace-nav pull-right">
-						<li class="grey">
-							<a data-toggle="dropdown" class="dropdown-toggle" href="#">
-								<i class="icon-tasks"></i>
-								<span class="badge badge-grey">4</span>
-							</a>
-
-							<ul class="pull-right dropdown-navbar dropdown-menu dropdown-caret dropdown-closer">
-								<li class="nav-header">
-									<i class="icon-ok"></i>
-									4 Tasks to complete
-								</li>
-
-								<li>
-									<a href="#">
-										<div class="clearfix">
-											<span class="pull-left">Software Update</span>
-											<span class="pull-right">65%</span>
-										</div>
-
-										<div class="progress progress-mini ">
-											<div style="width:65%" class="bar"></div>
-										</div>
-									</a>
-								</li>
-
-								<li>
-									<a href="#">
-										<div class="clearfix">
-											<span class="pull-left">Hardware Upgrade</span>
-											<span class="pull-right">35%</span>
-										</div>
-
-										<div class="progress progress-mini progress-danger">
-											<div style="width:35%" class="bar"></div>
-										</div>
-									</a>
-								</li>
-
-								<li>
-									<a href="#">
-										<div class="clearfix">
-											<span class="pull-left">Unit Testing</span>
-											<span class="pull-right">15%</span>
-										</div>
-
-										<div class="progress progress-mini progress-warning">
-											<div style="width:15%" class="bar"></div>
-										</div>
-									</a>
-								</li>
-
-								<li>
-									<a href="#">
-										<div class="clearfix">
-											<span class="pull-left">Bug Fixes</span>
-											<span class="pull-right">90%</span>
-										</div>
-
-										<div class="progress progress-mini progress-success progress-striped active">
-											<div style="width:90%" class="bar"></div>
-										</div>
-									</a>
-								</li>
-
-								<li>
-									<a href="#">
-										See tasks with details
-										<i class="icon-arrow-right"></i>
-									</a>
-								</li>
-							</ul>
-						</li>
 
 						<li class="purple">
 							<a data-toggle="dropdown" class="dropdown-toggle" href="#">
@@ -200,41 +128,6 @@
 								</li>
 
 								<li>
-									<a href="#">
-										<img src="assets/avatars/avatar.png" class="msg-photo" alt="Alex's Avatar" />
-										<span class="msg-body">
-											<span class="msg-title">
-												<span class="blue">Alex:</span>
-												Ciao sociis natoque penatibus et auctor ...
-											</span>
-
-											<span class="msg-time">
-												<i class="icon-time"></i>
-												<span>a moment ago</span>
-											</span>
-										</span>
-									</a>
-								</li>
-
-								<li>
-									<a href="#">
-										<img src="assets/avatars/avatar3.png" class="msg-photo" alt="Susan's Avatar" />
-										<span class="msg-body">
-											<span class="msg-title">
-												<span class="blue">Susan:</span>
-												Vestibulum id ligula porta felis euismod ...
-											</span>
-
-											<span class="msg-time">
-												<i class="icon-time"></i>
-												<span>20 minutes ago</span>
-											</span>
-										</span>
-									</a>
-								</li>
-
-
-								<li>
 									<a href="/messages">
 										See all messages
 										<i class="icon-arrow-right"></i>
@@ -245,7 +138,6 @@
 
 						<li class="light-blue">
 							<a data-toggle="dropdown" href="#" class="dropdown-toggle">
-								<img class="nav-user-photo" src="assets/avatars/user.jpg" alt="Jason's Photo" />
 								<span class="user-info">
 									<small>Welcome,</small>
 									{{user.first_name}}
@@ -256,14 +148,14 @@
 
 							<ul class="user-menu pull-right dropdown-menu dropdown-yellow dropdown-caret dropdown-closer">
 								<li>
-									<a href="/{{user.homesystem|slugify}}/settings">
+									<a href="{% url 'settings' user.homesystem|slugify %}">
 										<i class="icon-cog"></i>
 										Settings
 									</a>
 								</li>
 
 								<li>
-									<a href="/{{user.homesystem|slugify}}/user/{{user.username}}">
+									<a href="{% url 'profile' user.homesystem|slugify user.username %}">
 										<i class="icon-user"></i>
 										Profile
 									</a>
@@ -329,14 +221,14 @@
 
 				<ul class="nav nav-list">
 					<li>
-						<a href="/{{user.homesystem|slugify}}/home">
+						<a href="{% url 'home' user.homesystem|slugify %}">
 							<i class="icon-home"></i>
 							<span class="menu-text"> My Homepage </span>
 						</a>
 					</li>
 
 					<li>
-						<a href="/{{user.homesystem|slugify}}/openshift">
+						<a href="{% url 'openshift' user.homesystem|slugify %}">
 							<i class="icon-pencil"></i>
 							<span class="menu-text"> OpenShift </span>
 						</a>
@@ -354,7 +246,7 @@
 
 						{% for h in allhospitals %}
 							<li>
-								<a href="/{{user.homesystem|slugify}}/{{h.slug}}" class="dropdown-toggle">
+								<a href="{% url 'hospital' user.homesystem|slugify h.slug %} " class="dropdown-toggle">
 									<i class="icon-double-angle-right"></i>
 									{{h.name}}
 								</a>
@@ -384,7 +276,7 @@
 								<ul class="submenu">
 								  {% for u in allunits %}{% ifequal u.hospital|lower h.name|lower %}
 									<li>
-										<a href="/{{user.homesystem|slugify}}/{{h.slug}}/{{u.slug}}">
+										<a href="{% url 'unit' user.homesystem|slugify h.slug u.slug %}">
 											<i class="icon-leaf"></i>
 											{{u.name}}
 										</a>
@@ -427,7 +319,7 @@
 								</a>
 							</li>
 							<li>
-								<a href="/{{user.homesystem|slugify}}/datapull">
+								<a href="">
 									<i class="icon-double-angle-right"></i>
 									Data Pull
 								</a>
@@ -444,7 +336,7 @@
 						</a>
 						<ul class="submenu">
 							<li>
-								<a href="tables.html">
+								<a href="{% url 'calendar' user.homesystem|slugify %}">
 									<i class="icon-double-angle-right"></i>
 									Calendar
 								</a>
@@ -457,7 +349,7 @@
 								</a>
 							</li>
 							<li>
-								<a href="/{{user.homesystem|slugify}}/inputdates">
+								<a href="{% url 'inputdates' user.homesystem|slugify %}">
 									<i class="icon-double-angle-right"></i>
 									Input Dates
 								</a>
@@ -537,26 +429,26 @@
 		<!--[if !IE]> -->
 
 		<script type="text/javascript">
-			window.jQuery || document.write("<script src='/static/main/assets/js/jquery-2.0.3.min.js'>"+"<"+"/script>");
+			window.jQuery || document.write("<script src='/static/main/assets/ace/js/jquery-2.0.3.min.js'>"+"<"+"/script>");
 		</script>
 
 		<!-- <![endif]-->
 
 		<!--[if IE]>
 <script type="text/javascript">
- window.jQuery || document.write("<script src='/static/main/assets/js/jquery-1.10.2.min.js'>"+"<"+"/script>");
+ window.jQuery || document.write("<script src='/static/main/assets/ace/js/jquery-1.10.2.min.js'>"+"<"+"/script>");
 </script>
 <![endif]-->
 
 		<script type="text/javascript">
-			if("ontouchend" in document) document.write("<script src='/static/main/assets/js/jquery.mobile.custom.min.js' %}'>"+"<"+"/script>");
+			if("ontouchend" in document) document.write("<script src='/static/main/assets/ace/js/jquery.mobile.custom.min.js' %}'>"+"<"+"/script>");
 		</script>
-	    <script src="{% static 'main/assets/js/date-time/bootstrap-datepicker.min.js' %}"></script>
-	    <script src="{% static 'main/assets/js/jqGrid/jquery.jqGrid.min.js' %}"></script>
-	    <script src="{% static 'main/assets/js/jqGrid/i18n/grid.locale-en.js' %}"></script>
-		<script src="{% static 'main/assets/js/bootstrap.min.js' %}"></script>
-		<script src="{% static 'main/assets/js/ace-elements.min.js' %}"></script>
-		<script src="{% static 'main/assets/js/ace.min.js' %}"></script>
+	    <script src="{% static 'main/assets/ace/js/date-time/bootstrap-datepicker.min.js' %}"></script>
+	    <script src="{% static 'main/assets/ace/js/jqGrid/jquery.jqGrid.min.js' %}"></script>
+	    <script src="{% static 'main/assets/ace/js/jqGrid/i18n/grid.locale-en.js' %}"></script>
+		<script src="{% static 'main/assets/ace/js/bootstrap.min.js' %}"></script>
+		<script src="{% static 'main/assets/ace/js/ace-elements.min.js' %}"></script>
+		<script src="{% static 'main/assets/ace/js/ace.min.js' %}"></script>
 
 
 

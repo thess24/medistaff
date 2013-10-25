@@ -3,7 +3,7 @@
 {% block title %}Add OpenShift{% endblock%}
 
 {% block head %}{%load staticfiles%}
-    <link rel="stylesheet" href="{% static 'main/assets/css/fullcalendar.css' %}" />
+    <link rel="stylesheet" href="{% static 'main/assets/ace/css/fullcalendar.css' %}" />
 {% endblock %}
 
 
@@ -19,6 +19,36 @@
             </h1>
           </div><!-- /.page-header -->
 
+
+          <div class="row-fluid"> 
+            <div class="span12">
+
+        <table class='table table-bordered table-hover'>
+          <thead>
+            <tr> 
+              <th>Start</th>
+              <th>End</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for wd in hoursavailable %}
+            <tr>
+              <td>{{wd.start}}</td>
+              <td>{{wd.end}}</td>
+              <td>
+                <form method='post' style='margin: 0'>{% csrf_token %}
+                  <input type='hidden' value='{{wd.id}}' name='id'/>
+                  <input type='submit' class='btn btn-mini btn-danger' name='delete' value='delete' >
+                </form>
+              </td>
+            </tr>
+              {% endfor %}
+          </tbody>
+        </table>
+            </div>
+          </div>
+
           <div class="row-fluid"> 
             <div class="span12">
               <!-- PAGE CONTENT BEGINS -->
@@ -28,58 +58,43 @@
                   <div class="space"></div>
 
                   <div id="calendar"></div>
+
+                    <div id="createEventModal" class="modal hide" aria-hidden="true">
+                          <div class="modal-header">
+                              <button type="button" class="close" data-dismiss="modal" aria-hidden="true">x</button>
+                              <h3>Create Availability</h3>
+                          </div>
+
+                          <form method='post' class="form-horizontal">{% csrf_token %}
+                              <div class="modal-body">
+                                  <div class="control-group">
+                                      <label class="control-label">Name:</label>
+                                      <div class="controls">
+                                            <div style='padding-top:5px; color:green'><b>Available</b></div>
+                                            <input type="hidden" id="id_start" name='start'/>
+                                            <input type="hidden" id="id_end" name='end' />
+                                            <input type="hidden" id="apptAllDay" />
+                                      </div>
+                                  </div>
+                                  <div class="control-group">
+                                      <label class="control-label" for="when">When:</label>
+                                      <div class="controls controls-row" id="when" style="margin-top:5px;">
+                                      </div>
+                                  </div>
+                              </div>
+                              <div class="modal-footer">
+                                  <button class="btn" data-dismiss="modal" aria-hidden="true">Cancel</button>
+                                  <button type="submit" name='hoursinput' class="btn btn-primary" id="submitButton">Save</button>
+                              </div>
+                          </form>
+                    </div>
+
                 </div>
 
                 <div class="span3">
                   <div class="widget-box transparent">
                     <div class="widget-header">
                       <h4>Draggable events</h4>
-                    </div>
-
-                    <div class="widget-body">
-                      <div class="widget-main">
-                        <div id="external-events">
-                          <div class="external-event label-grey" data-class="label-grey">
-                            <i class="icon-move"></i>
-                            My Event 1
-                          </div>
-
-                          <div class="external-event label-success" data-class="label-success">
-                            <i class="icon-move"></i>
-                            My Event 2
-                          </div>
-
-                          <div class="external-event label-important" data-class="label-important">
-                            <i class="icon-move"></i>
-                            My Event 3
-                          </div>
-
-                          <div class="external-event label-purple" data-class="label-purple">
-                            <i class="icon-move"></i>
-                            My Event 4
-                          </div>
-
-                          <div class="external-event label-yellow" data-class="label-yellow">
-                            <i class="icon-move"></i>
-                            My Event 5
-                          </div>
-
-                          <div class="external-event label-pink" data-class="label-pink">
-                            <i class="icon-move"></i>
-                            My Event 6
-                          </div>
-
-                          <div class="external-event label-info" data-class="label-info">
-                            <i class="icon-move"></i>
-                            My Event 7
-                          </div>
-
-                          <label>
-                            <input type="checkbox" class="ace ace-checkbox" id="drop-remove" />
-                            <span class="lbl"> Remove after drop</span>
-                          </label>
-                        </div>
-                      </div>
                     </div>
                   </div>
                 </div>
@@ -97,52 +112,36 @@
 <script src="{% static 'main/jquery-ui.js' %}"></script>
 <script src="{% static 'main/jquery-ui-timepicker-addon.js' %}"></script> 
 
-<script src="{% static 'main/assets/js/jquery-ui-1.10.3.custom.min.js' %}"></script> 
-<script src="{% static 'main/assets/js/jquery.ui.touch-punch.min.js' %}"></script> 
-<script src="{% static 'main/assets/js/fullcalendar.min.js' %}"></script> 
-<script src="{% static 'main/assets/js/bootbox.min.js' %}"></script> 
+<script src="{% static 'main/assets/ace/js/jquery-ui-1.10.3.custom.min.js' %}"></script> 
+<script src="{% static 'main/assets/ace/js/jquery.ui.touch-punch.min.js' %}"></script> 
+<script src="{% static 'main/assets/ace/js/fullcalendar.min.js' %}"></script> 
+<script src="{% static 'main/assets/ace/js/bootbox.min.js' %}"></script> 
+
+
+<style type="text/css">
+/*    .ui-slider-handle{
+      position: relative;
+    }*/
+</style>
+
+
+// <script type="text/javascript">
+//     $(function() {
+//         $('#id_start').datetimepicker({dateFormat: "yy-mm-dd", timeFormat: 'HH:mm', stepMinute:15});
+//         $('#id_end').datetimepicker({dateFormat: "yy-mm-dd", timeFormat: 'HH:mm', stepMinute:15});
+//       });
+// </script>
 
 
 <script type="text/javascript">
-      jQuery(function($) {
-
-/* initialize the external events
-  -----------------------------------------------------------------*/
-
-  $('#external-events div.external-event').each(function() {
-
-    // create an Event Object (http://arshaw.com/fullcalendar/docs/event_data/Event_Object/)
-    // it doesn't need to have a start or end
-    var eventObject = {
-      title: $.trim($(this).text()) // use the element's text as the event title
-    };
-
-    // store the Event Object in the DOM element so we can get to it later
-    $(this).data('eventObject', eventObject);
-
-    // make the event draggable using jQuery UI
-    $(this).draggable({
-      zIndex: 999,
-      revert: true,      // will cause the event to go back to its
-      revertDuration: 0  //  original position after the drag
-    });
-    
-  });
-
-
-
 
   /* initialize the calendar
   -----------------------------------------------------------------*/
+$(document).ready(function() {
 
-  var date = new Date();
-  var d = date.getDate();
-  var m = date.getMonth();
-  var y = date.getFullYear();
-
-  
-  var calendar = $('#calendar').fullCalendar({
-     buttonText: {
+    var calendar = $('#calendar').fullCalendar({
+    defaultView: 'month',
+    buttonText: {
       prev: '<i class="icon-chevron-left"></i>',
       next: '<i class="icon-chevron-right"></i>'
     },
@@ -150,129 +149,67 @@
     header: {
       left: 'prev,next today',
       center: 'title',
-      right: 'month,agendaWeek,agendaDay'
+      right: 'month,agendaWeek'
     },
     events: [
+    // {% for wd in workday %}
     {
-      title: 'All Day Event',
-      start: new Date(y, m, 1),
-      className: 'label-important'
-    },
-    {
-      title: 'Long Event',
-      start: new Date(y, m, d-5),
-      end: new Date(y, m, d-2),
-      className: 'label-success'
-    },
-    {
-      title: 'Some Event',
-      start: new Date(y, m, d-3, 16, 0),
+      title: '{{wd.hospital}}- {{wd.unit}}',
+      start: new Date({{wd.start|date:'Y'}}, {{wd.start|date:'m'}}-1, {{wd.start|date:'d'}}, {{wd.start|date:'h'}}, {{wd.start|date:'i'}}),
+      end: new Date({{wd.end|date:'Y'}}, {{wd.end|date:'m'}}-1, {{wd.end|date:'d'}},{{wd.end|date:'h'}}, {{wd.end|date:'i'}}),
       allDay: false
-    }]
+    },
+    // {% endfor %}
+    // {% for wd in hoursavailable %}
+    {
+      title: 'Available',
+      start: new Date({{wd.start|date:'Y'}}, {{wd.start|date:'m'}}-1, {{wd.start|date:'d'}}, {{wd.start|date:'h'}}, {{wd.start|date:'i'}}),
+      end: new Date({{wd.end|date:'Y'}}, {{wd.end|date:'m'}}-1, {{wd.end|date:'d'}},{{wd.end|date:'h'}}, {{wd.end|date:'i'}}),
+      className: 'label-success',
+      allDay: false
+
+    },
+    // {% endfor %}
+    ]
     ,
-    editable: true,
-    droppable: true, // this allows things to be dropped onto the calendar !!!
-    drop: function(date, allDay) { // this function is called when something is dropped
-    
-      // retrieve the dropped element's stored Event Object
-      var originalEventObject = $(this).data('eventObject');
-      var $extraEventClass = $(this).attr('data-class');
-      
-      
-      // we need to copy it, so that multiple events don't have a reference to the same object
-      var copiedEventObject = $.extend({}, originalEventObject);
-      
-      // assign it the date that was reported
-      copiedEventObject.start = date;
-      copiedEventObject.allDay = allDay;
-      if($extraEventClass) copiedEventObject['className'] = [$extraEventClass];
-      
-      // render the event on the calendar
-      // the last `true` argument determines if the event "sticks" (http://arshaw.com/fullcalendar/docs/event_rendering/renderEvent/)
-      $('#calendar').fullCalendar('renderEvent', copiedEventObject, true);
-      
-      // is the "remove after drop" checkbox checked?
-      if ($('#drop-remove').is(':checked')) {
-        // if so, remove the element from the "Draggable Events" list
-        $(this).remove();
-      }
-      
-    }
-    ,
-    selectable: true,
-    selectHelper: true,
-    select: function(start, end, allDay) {
-      
-      bootbox.prompt("New Event Title:", function(title) {
-        if (title !== null) {
-          calendar.fullCalendar('renderEvent',
-            {
-              title: title,
-              start: start,
-              end: end,
-              allDay: allDay
-            },
-            true // make the event "stick"
-          );
-        }
-      });
-      
+      editable: true,
+      selectable: true,
+      //header and other values
+      select: function(start, end, allDay) {
+          whenend = $.fullCalendar.formatDate(end,'ddd, MMM d, h:mm tt');       // for display in popup
+          whenstart = $.fullCalendar.formatDate(start,'ddd, MMM d, h:mm tt');   // for display in popup
+          endtime = $.fullCalendar.formatDate(end,'yyyy-MM-dd HH:mm:ss');
+          starttime = $.fullCalendar.formatDate(start,'yyyy-MM-dd HH:mm:ss');
+          var mywhen = whenstart + '  -  ' + whenend;
+          $('#createEventModal #id_start').val(starttime);
+          $('#createEventModal #id_end').val(endtime);
+          $('#createEventModal #apptAllDay').val(allDay);
+          $('#createEventModal #when').text(mywhen);
+          $('#createEventModal').modal('show');
+       }
+    });
 
-      calendar.fullCalendar('unselect');
-      
-    }
-    ,
-    eventClick: function(calEvent, jsEvent, view) {
+  // $('#submitButton').on('click', function(e){
+  //   // We don't want this to act as a link so cancel the link action
+  //   e.preventDefault();
 
-      var form = $("<form class='form-inline'><label>Change event name &nbsp;</label></form>");
-      form.append("<input autocomplete=off type=text value='" + calEvent.title + "' /> ");
-      form.append("<button type='submit' class='btn btn-small btn-success'><i class='icon-ok'></i> Save</button>");
-      
-      var div = bootbox.dialog(form,
-        [
-        {
-          "label" : "<i class='icon-trash'></i> Delete Event",
-          "class" : "btn-small btn-danger",
-          "callback": function() {
-            calendar.fullCalendar('removeEvents' , function(ev){
-              return (ev._id == calEvent._id);
-            })
-          }
-        }
-        ,
-        {
-          "label" : "<i class='icon-remove'></i> Close",
-          "class" : "btn-small"
-        }
-        ]
-        ,
-        {
-          // prompts need a few extra options
-          "onEscape": function(){div.modal("hide");}
-        }
-      );
-      
-      form.on('submit', function(){
-        calEvent.title = form.find("input[type=text]").val();
-        calendar.fullCalendar('updateEvent', calEvent);
-        div.modal("hide");
-        return false;
-      });
-      
-    
-      //console.log(calEvent.id);
-      //console.log(jsEvent);
-      //console.log(view);
+  //   doSubmit();
+  // });
 
-      // change the border color just for fun
-      //$(this).css('border-color', 'red');
+  // function doSubmit(){
+  //   $("#createEventModal").modal('hide');
 
-    }
-    
-  });
-
-
-})
+  //   $("#calendar").fullCalendar('renderEvent',
+  //       {
+  //           title: 'Available',
+  //           start: new Date($('#id_calstart').val()),
+  //           end: new Date($('#id_calend').val()),
+  //           className: 'label-success',
+  //           allDay: ($('#apptAllDay').val() == "true"),
+  //       },
+  //       true);
+  //  }
+});
     </script>
 {% endblock %}
 

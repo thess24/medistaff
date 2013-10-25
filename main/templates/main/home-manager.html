@@ -1,0 +1,428 @@
+{% extends "base.html" %}
+
+{% block title %}System Overview{% endblock%}
+
+{% block head %}{%load staticfiles%}
+    <link rel="stylesheet" href="{% static 'main/assets/ace/css/fullcalendar.css' %}" />
+{% endblock %}
+
+{% block content %}
+
+          <div class="page-header position-relative">
+            <h1>
+              Welcome, {{user.first_name}}
+              <small>
+                <i class="icon-double-angle-right"></i>
+                Manager Homepage
+              </small>
+
+              <div class='pull-right'>
+              <a href="{% url 'profile' user.homeunit.system|slugify user.username %}" class='btn btn-small'>Profile</a>
+              <a href="{% url 'inputdates' user.homeunit.system|slugify %}" class='btn btn-small'>Input Available Hours</a>
+              <a href="{% url 'unit' user.homeunit.system|slugify user.homeunit.hospital|slugify user.homeunit.name|slugify %}" class='btn btn-small'>Go to Homeunit</a>
+              </div>
+            </h1>
+          </div><!-- /.page-header -->
+
+  <div class="row-fluid">
+    <div class="span12">
+      <!-- PAGE CONTENT BEGINS -->
+
+      <div class="row-fluid">
+        <div class="span5">
+          <div>
+          <a href="{% url 'openshiftindex' unitmanaged.unit.system|slugify %}" class='btn'>Post OpenShift</a>
+          <a href="" class='btn'>Schedule Shifts</a>
+          </div>    
+ 
+<br>
+
+                <div class="infobox infobox-green  ">
+                    <div class="infobox-icon">
+                      <i class="icon-comments"></i>
+                    </div>
+
+                    <div class="infobox-data">
+                      <span class="infobox-data-number">{{lastcensus.census}}</span>
+                      <div class="infobox-content">Census at {{lastcensus.time|date:"SHORT_DATE_FORMAT"}}</div>
+                    </div>
+                  </div>
+
+                  <div class="infobox infobox-blue  ">
+                    <div class="infobox-icon">
+                      <i class="icon-twitter"></i>
+                    </div>
+
+                    <div class="infobox-data">
+                      <span class="infobox-data-number">150</span>
+                      <div class="infobox-content">Hours Scheduled Today</div>
+                    </div>
+                  </div>
+
+                  <div class="infobox infobox-pink  ">
+                    <div class="infobox-icon">
+                      <i class="icon-shopping-cart"></i>
+                    </div>
+
+                    <div class="infobox-data">
+                      <span class="infobox-data-number">8</span>
+                      <div class="infobox-content">HPPD</div>
+                    </div>
+                  </div>
+
+                  <div class="infobox infobox-red  ">
+                    <div class="infobox-icon">
+                      <i class="icon-beaker"></i>
+                    </div>
+
+                    <div class="infobox-data">
+                      <span class="infobox-data-number">7</span>
+                      <div class="infobox-content">People Working Today</div>
+                    </div>
+                  </div>
+
+                  <div class="infobox infobox-orange2  ">
+                    <div class="infobox-chart">
+                      <span class="sparkline" data-values="196,128,202,177,154,94,100,170,224"></span>
+                    </div>
+
+                    <div class="infobox-data">
+                      <span class="infobox-data-number">4</span>
+                      <div class="infobox-content">OT Hours Today</div>
+                    </div>
+                  </div>
+
+                  <div class="infobox infobox-red  ">
+                    <div class="infobox-icon">
+                      <i class="icon-beaker"></i>
+                    </div>
+
+                    <div class="infobox-data">
+                      <span class="infobox-data-number">{{workingnow}}</span>
+                      <div class="infobox-content">Working Now</div>
+                    </div>
+                  </div>
+<br>
+
+                  <div class="widget-box transparent">
+                    <div class="widget-header widget-header-flat">
+                      <h4 class="lighter">
+                        <i class="icon-signal"></i>
+                        Sale Stats
+                      </h4>
+
+                      <div class="widget-toolbar">
+                        <a href="#" data-action="collapse">
+                          <i class="icon-chevron-up"></i>
+                        </a>
+                      </div>
+                    </div>
+
+                    <div class="widget-body">
+                      <div class="widget-main padding-4">
+                        <div id="sales-charts"></div>
+                      </div><!-- /widget-main -->
+                    </div><!-- /widget-body -->
+                  </div><!-- /widget-box -->
+
+
+          <h3 class="header smaller lighter blue">OpenShifts</h3>
+          <table id="sample-table-1" class="table table-striped table-bordered table-hover">
+            <thead>
+              <tr>
+                <th>Location</th>
+                <th>Unit</th>
+                <th>Start Time</th>
+                <th>Finish Time</th>
+              </tr>
+            </thead>
+            <tbody>
+               {%for wd in openshift%}
+              <tr>
+                <td>{{wd.hospital}}</td>
+                <td>{{wd.unit}}</td>
+                <td>{{wd.start|time:"h:i a"}}</td>
+                <td>{{wd.end|time:"h:i a"}}</td>
+              </tr>
+                {% empty %}
+              <tr>
+                <td>Currently no OpenShifts</td>
+                <td></td>
+                <td></td>
+                <td></td>
+              </tr>
+                {% endfor %}
+            </tbody>
+          </table>
+          </div>
+
+
+          <div class='span7'>
+            <div class='row-fluid'>
+
+              <div class='span6'>
+                    <div class="widget-box transparent">
+                      <div class="widget-header">
+                        <h4>Quick Links</h4>
+                        <span class="widget-toolbar">
+                          <a href="#" data-action="collapse">
+                            <i class="icon-chevron-up"></i>
+                          </a>
+                        </span>
+                      </div>
+
+                      <div class="widget-body">
+                        <div class="widget-main">
+                          <div><a href="{% url 'profile' user.homeunit.system|slugify user.username %}" >Profile</a></div>
+                          <div><a href="{% url 'inputdates' user.homeunit.system|slugify %}" >Input Available Hours</a></div>
+                          <div><a href="{% url 'unit' user.homeunit.system|slugify user.homeunit.hospital|slugify user.homeunit.name|slugify %}">Go to Homeunit</a></div>
+                        </div>
+                      </div>
+                    </div>
+              </div>
+
+              <div class='span6'>
+                    <div class="widget-box transparent">
+                      <div class="widget-header">
+                        <h4>Info</h4>
+                        <span class="widget-toolbar">
+                          <a href="#" data-action="collapse">
+                            <i class="icon-chevron-up"></i>
+                          </a>
+                        </span>
+                      </div>
+
+                      <div class="widget-body">
+                            <div>
+                                <div class="clearfix">
+                                  <span class="pull-left">Weekends this month</span>
+                                  <span class="pull-right">65%</span>
+                                </div>
+
+                                <div class="progress progress-mini ">
+                                  <div style="width:65%" class="bar"></div>
+                                </div>
+                            </div>
+
+                            <div>
+                                <div class="clearfix">
+                                  <span class="pull-left">Nights this month</span>
+                                  <span class="pull-right">35%</span>
+                                </div>
+
+                                <div class="progress progress-mini progress-danger">
+                                  <div style="width:35%" class="bar"></div>
+                                </div>
+                            </div>
+
+                            <div>
+                                <div class="clearfix">
+                                  <span class="pull-left">Holidays this month</span>
+                                  <span class="pull-right">15%</span>
+                                </div>
+
+                                <div class="progress progress-mini progress-warning">
+                                  <div style="width:15%" class="bar"></div>
+                                </div>
+                            </div>
+                        </div>
+                      </div>
+                    </div>
+
+              <div class='span12'>
+                  <div class="widget-box transparent">
+                    <div class="widget-header">
+                      <h5 class="smaller">Schedule</h5>
+
+                      <div class="widget-toolbar no-border">
+                        <ul class="nav nav-tabs" id="myTab">
+                          <li class="active">
+                            <a data-toggle="tab" href="#calendar">Calendar</a>
+                          </li>
+
+                          <li>
+                            <a data-toggle="tab" href="#list">List</a>
+                          </li>
+
+                        </ul>
+                      </div>                    
+                    </div>
+
+                      <div class="widget-body">
+                        <div class="widget-main padding-6">
+                          <div class="tab-content">
+
+                            <div id='calendar' class="tab-pane in active" style='margin-top:40px'></div>
+
+                            <div id="list" class="tab-pane">
+                               <table id="sample-table-1" class="table table-striped table-bordered table-hover">
+                                <thead>
+                                  <tr>
+                                    <th>Location</th>
+                                    <th>Unit</th>
+                                    <th>Start Time</th>
+                                    <th>Finish Time</th>
+                                  </tr>
+                                </thead>
+                                <tbody>
+                                  {%for wd in workday%}
+                                  <tr>
+                                    <td>{{wd.hospital}}</td>
+                                    <td>{{wd.unit}}</td>
+                                    <td>{{wd.start|time:"h:i a"}}</td>
+                                    <td>{{wd.end|time:"h:i a"}}</td>
+                                  </tr>
+                                    {% endfor %}
+                                </tbody>
+                              </table>
+                            </div>
+
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                </div>
+
+
+              </div>
+          </div>
+
+        </div>
+    </div>
+  </div>
+
+{% endblock %} 
+
+{% block extrascripts %}{%load staticfiles%}
+
+<script src="{% static 'main/jquery-ui.js' %}"></script>
+
+<script src="{% static 'main/assets/ace/js/jquery-ui-1.10.3.custom.min.js' %}"></script> 
+<script src="{% static 'main/assets/ace/js/jquery.ui.touch-punch.min.js' %}"></script> 
+<script src="{% static 'main/assets/ace/js/fullcalendar.min.js' %}"></script> 
+<script src="{% static 'main/assets/ace/js/bootbox.min.js' %}"></script> 
+
+
+
+    <!-- page specific plugin scripts -->
+
+    <!--[if lte IE 8]>
+      <script src="{% static 'main/assets/ace/js/excanvas.min.js' %}"></script>
+    <![endif]-->
+
+    <script src="{% static 'main/assets/ace/js/jquery.sparkline.min.js' %}"></script>
+    <script src="{% static 'main/assets/ace/js/flot/jquery.flot.min.js' %}"></script>
+    <script src="{% static 'main/assets/ace/js/flot/jquery.flot.resize.min.js' %}"></script>
+
+
+    <!-- inline scripts related to this page -->
+
+    <script type="text/javascript">
+      jQuery(function($) {
+
+      
+        $('.sparkline').each(function(){
+          var $box = $(this).closest('.infobox');
+          var barColor = !$box.hasClass('infobox-dark') ? $box.css('color') : '#FFF';
+          $(this).sparkline('html', {tagValuesAttribute:'data-values', type: 'bar', barColor: barColor , chartRangeMin:$(this).data('min') || 0} );
+        });
+      
+      
+
+        var d1 = [];
+        for (var i = 0; i < Math.PI * 2; i += 0.5) {
+          d1.push([i, Math.sin(i)]);
+        }
+      
+        var d2 = [];
+        for (var i = 0; i < Math.PI * 2; i += 0.5) {
+          d2.push([i, Math.cos(i)]);
+        }
+      
+        var d3 = [];
+        for (var i = 0; i < Math.PI * 2; i += 0.2) {
+          d3.push([i, Math.tan(i)]);
+        }
+        
+      
+        var sales_charts = $('#sales-charts').css({'width':'100%' , 'height':'220px'});
+        $.plot("#sales-charts", [
+          { label: "Domains", data: d1 },
+          { label: "Hosting", data: d2 },
+          { label: "Services", data: d3 }
+        ], {
+          hoverable: true,
+          shadowSize: 0,
+          series: {
+            lines: { show: true },
+            points: { show: true }
+          },
+          xaxis: {
+            tickLength: 0
+          },
+          yaxis: {
+            ticks: 10,
+            min: -2,
+            max: 2,
+            tickDecimals: 3
+          },
+          grid: {
+            backgroundColor: { colors: [ "#fff", "#fff" ] },
+            borderWidth: 1,
+            borderColor:'#555'
+          }
+        });
+      
+
+      });
+    </script>
+
+<script type="text/javascript">
+
+  /* initialize the calendar
+  -----------------------------------------------------------------*/
+$(document).ready(function() {
+
+    var calendar = $('#calendar').fullCalendar({
+    defaultView: 'agendaDay',
+    buttonText: {
+      prev: '<i class="icon-chevron-left"></i>',
+      next: '<i class="icon-chevron-right"></i>'
+    },
+  
+    header: {
+      left: 'prev,next today',
+      center: 'title',
+      right: 'agendaWeek,agendaDay'
+    },
+    events: [
+    // {% for wd in workday %}
+    {
+      title: '{{wd.hospital}}- {{wd.unit}}',
+      start: new Date({{wd.start|date:'Y'}}, {{wd.start|date:'m'}}-1, {{wd.start|date:'d'}}, {{wd.start|date:'h'}}, {{wd.start|date:'i'}}),
+      end: new Date({{wd.end|date:'Y'}}, {{wd.end|date:'m'}}-1, {{wd.end|date:'d'}},{{wd.end|date:'h'}}, {{wd.end|date:'i'}}),
+      allDay: false
+    },
+    // {% endfor %}
+    // {% for wd in hoursavailable %}
+    {
+      title: 'Available',
+      start: new Date({{wd.start|date:'Y'}}, {{wd.start|date:'m'}}-1, {{wd.start|date:'d'}}, {{wd.start|date:'h'}}, {{wd.start|date:'i'}}),
+      end: new Date({{wd.end|date:'Y'}}, {{wd.end|date:'m'}}-1, {{wd.end|date:'d'}},{{wd.end|date:'h'}}, {{wd.end|date:'i'}}),
+      className: 'label-success',
+      allDay: false
+
+    },
+    // {% endfor %}
+    ]
+    ,
+      editable: false,
+      selectable: true,
+
+    });
+
+});
+    </script>
+{% endblock %}
+
+

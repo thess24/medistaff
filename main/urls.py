@@ -18,10 +18,13 @@ urlpatterns = patterns('',
     url(r'^(?P<systempass>.+)/systemsettings/$', views.systemsettings, name='systemsettings'),  # system settings
     url(r'^(?P<systempass>.+)/addhospital/$', views.addhospital, name='addhospital'),  # add hospital
     url(r'^(?P<systempass>.+)/addopenshift/$', views.openshiftindex, name='openshiftindex'),  # openshift adding index
+    url(r'^(?P<systempass>.+)/calendar/$', views.calendar, name='calendar'),  # calendar
     url(r'^(?P<systempass>.+)/inputdates/$', views.inputdates, name='inputdates'),  # add schedule
     url(r'^(?P<systempass>.+)/nursefilter/$', views.nursefilter, name='nursefilter'),  # add hospital
     url(r'^(?P<systempass>.+)/settings/$', views.settings, name='settings'),  # nurse settings and home
     url(r'^(?P<systempass>.+)/home/$', views.home, name='home'),  # nurse home - lists hours you are working
+    url(r'^(?P<systempass>.+)/managers/$', views.managers, name='managers'),  # managers
+    url(r'^(?P<systempass>.+)/editmanagers/$', views.editmanagers, name='editmanagers'),  # editmanagers
     url(r'^(?P<systempass>.+)/(?P<hospitalpass>.+)/$', views.hospital, name='hospital'),  # hospital overview
     url(r'^(?P<systempass>.+)/$', views.systemoverview, name='systemoverview'),  # system overview
 
@@ -33,50 +36,61 @@ urlpatterns = patterns('',
 
 #### HIGH PRIORITY--Key Featurns
 
-# make system for users to register to a certain system and get verified-- key maps to system
-# make unit tables work in hopsital dashboard- SQL
-# javascript scheduler
+    # make unit tables work in hopsital dashboard- SQL
 
-# make frontend sales pages
-# figure out displaying images
+    # make frontend
+            # continute to add content for benefits, features, index, etc
 
-# add agency as person
-# do page to input schedules
-# work on census prediction/forcasting
+    # work on census prediction/forcasting
 
+    # add, delete, update objects via calendar
+            # get rid of updating on some cal pages? --no month input for availability
+            # not working properly, dates displaying at wrong times
 
+    # sales stats chart to represent census and hppd
+    # correct numbers in manager dash
+    # give access permissions based on manager or not
+    # get rid of unncesary fk fields (system and hospital)
+    # profile update page
+    # system to add managers -- editmanagers, managers
+    # more than one manager for a unit
+    
 
 #### MID PRIORITY
 
-# add data page- to compare and sort through data of different periods
-# export schedule to pdf, excel
-# add south
-
-
-
+    # add data page- to compare and sort through data of different periods
+    # export schedule to pdf, excel
+    # add south
+    # add agency as person
+    # figure out displaying images
+    # make system for users to register to a certain system and get verified-- key maps to system
 
 #### Pages to add
+    ## back.......
 
-# about
-# contact
-# why buy--value for corporate, nurses, managers
-# overview of features
+    # recent events
+    # faq, help for nurses, managers
 
-# data pull
-# page for nurses to list hours
-# recent events
 
+    ## front.......
+
+    # how it works
+    # buy here -- contact us instructions
+    # healthcare studies
 
 
 #### Bonus Features
 
-# text to nurse
+    # text to nurse
 
 
 
 ###########################
 
 # problems
+
+# exception not handled properly in contextprocessor for admin with first user
+# django needs to be updated for security patch
 
 
 
@@ -91,7 +105,15 @@ urlpatterns = patterns('',
 # lasting competitive advantage?
 
 
+############################
 
+ # Before Getting Online
+
+
+     # look into deployment
+     # fabric
+     # south
+     # memcached
 
 
 
@@ -99,8 +121,8 @@ urlpatterns = patterns('',
 
 # Questions?????
 
-# How does Agency work? Do the workers have to get approved? Do they work for a day or for a few weeks?
-# How is census reported in the hospital? By unit? How is HPPD calculated? Who reports it?
+    # How does Agency work? Do the workers have to get approved? Do they work for a day or for a few weeks?
+    # How is census reported in the hospital? By unit? How is HPPD calculated? Who reports it?
 
 
 
